@@ -1,1 +1,9 @@
-﻿{"name":"opencareers-tor-2026","version":"1.0.0","private":true,"scripts":{"build":"node build.cjs"}}
+{
+  "name": "opencareers-tor-2026",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.cjs",
+    "build:vercel": "node build-static.cjs"
+  }
+}
