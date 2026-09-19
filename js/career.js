@@ -64,6 +64,29 @@ const LearningPlan = (() => {
 })();
 (() => {
  const planner=$('#careerPlanner'),levels={};
+ const interested=new Set();
+ try{const saved=JSON.parse(localStorage.getItem('careernext.courses')||'[]');if(Array.isArray(saved))saved.filter(code=>COURSES.some(c=>c.code===code)).forEach(code=>interested.add(code));}catch{}
+ function interestButton(code){
+  const active=interested.has(code),course=COURSES.find(c=>c.code===code);
+  return `<button type="button" class="course-interest" data-interest="${code}" aria-pressed="${active}" aria-label="สนใจหลักสูตร ${esc(course.title)}"><span aria-hidden="true">${active?'♥':'♡'}</span> ${active?'สนใจแล้ว':'สนใจหลักสูตร'}</button>`;
+ }
+ function filterCourses(){
+  const only=$('#interestedCoursesOnly').checked;let count=0;
+  $('#training .training-card').forEach(card=>{const show=!only||interested.has(card.id.replace('course-',''));card.hidden=!show;if(show)count++;});
+  $('#noInterestedCourses').hidden=count>0;
+ }
+ const grid=$('#training .training-grid');
+ grid.insertAdjacentHTML('beforebegin','<label class="course-interest-filter"><input type="checkbox" id="interestedCoursesOnly"> แสดงเฉพาะหลักสูตรที่สนใจ</label><p id="noInterestedCourses" class="empty-state" hidden>ยังไม่มีหลักสูตรที่สนใจ ยกเลิกตัวกรองเพื่อดูหลักสูตรทั้งหมดแล้วกดหัวใจได้เลย</p>');
+ COURSES.forEach(course=>$('#course-'+course.code+' .training-content').insertAdjacentHTML('beforeend',interestButton(course.code)));
+ $('#interestedCoursesOnly').addEventListener('change',filterCourses);
+ document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-interest]');if(!button)return;
+  const code=button.dataset.interest;
+  interested.has(code)?interested.delete(code):interested.add(code);
+  try{localStorage.setItem('careernext.courses',JSON.stringify([...interested]));}catch{}
+  $('[data-interest]').filter(el=>el.dataset.interest===code).forEach(el=>{const active=interested.has(code);el.setAttribute('aria-pressed',String(active));el.innerHTML='<span aria-hidden="true">'+(active?'♥':'♡')+'</span> '+(active?'สนใจแล้ว':'สนใจหลักสูตร');});
+  filterCourses();
+ });
  let report=null;
  const results=document.createElement('section');
  results.id='careerResults';results.hidden=true;results.setAttribute('aria-label','สรุปแผนพัฒนาทักษะ');
@@ -73,7 +96,7 @@ const LearningPlan = (() => {
  const stepsFor=j=>LearningPlan.build(j,levels,COURSES);
  function stepsHTML(steps){
   if(!steps.length)return '<div class="next-step">คุณระบุว่าเชี่ยวชาญครบทุกด้านแล้ว จึงไม่แนะนำให้เรียนพื้นฐานซ้ำ ลองทำ Portfolio ตามงานที่สนใจและขอให้ผู้มีประสบการณ์ประเมินผลงาน</div>';
-  return '<p class="field-help">เรียงจากพื้นฐานที่ยังขาด → ฝึกใช้งาน → ต่อยอดขั้นสูง ภายในแต่ละช่วงเริ่มจากทักษะพื้นฐานของสายงานก่อน ลำดับนี้เป็นแนวทางจากข้อมูลที่คุณระบุ</p><ol class="recommended-courses">'+steps.map((s,i)=>`<li><span class="plan-tier">${i===0?'เริ่มที่นี่':`ลำดับ ${i+1}`} · ${['ปูพื้นฐาน','ฝึกประยุกต์','ต่อยอดขั้นสูง'][s.stage]}${s.optional?' · ทางเลือกเพิ่มเติม':''}</span><h4>${esc(s.title)}</h4><p><strong>พัฒนาด้าน:</strong> ${esc(s.skills.join(' · '))}</p><p>${esc(s.reason)}</p><p class="field-help">${esc(s.practice)}</p><p class="field-help">${esc(s.note)}</p>${s.course?`<p>${s.course.hours} ชั่วโมง · ฿${money(s.course.price)}</p><a class="details-link course-catalog-link" href="#course/${s.course.code}">ดูรายละเอียดหลักสูตร →</a>`:''}</li>`).join('')+'</ol>';
+  return '<p class="field-help">เรียงจากพื้นฐานที่ยังขาด → ฝึกใช้งาน → ต่อยอดขั้นสูง ภายในแต่ละช่วงเริ่มจากทักษะพื้นฐานของสายงานก่อน ลำดับนี้เป็นแนวทางจากข้อมูลที่คุณระบุ</p><ol class="recommended-courses">'+steps.map((s,i)=>`<li><span class="plan-tier">${i===0?'เริ่มที่นี่':`ลำดับ ${i+1}`} · ${['ปูพื้นฐาน','ฝึกประยุกต์','ต่อยอดขั้นสูง'][s.stage]}${s.optional?' · ทางเลือกเพิ่มเติม':''}</span><h4>${esc(s.title)}</h4><p><strong>พัฒนาด้าน:</strong> ${esc(s.skills.join(' · '))}</p><p>${esc(s.reason)}</p><p class="field-help">${esc(s.practice)}</p><p class="field-help">${esc(s.note)}</p>${s.course?`<p>${s.course.hours} ชั่วโมง · ฿${money(s.course.price)}</p><a class="details-link course-catalog-link" href="#course/${s.course.code}">ดูรายละเอียดหลักสูตร →</a>${interestButton(s.course.code)}`:''}</li>`).join('')+'</ol>';
  }
  function overview(j){
   const counts=[0,0,0,0];j.skills.forEach(s=>counts[levels[s]||0]++);
@@ -114,7 +137,7 @@ const LearningPlan = (() => {
   Object.keys(levels).forEach(k=>delete levels[k]);report=null;results.innerHTML='';results.hidden=true;
   $('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;$('#planError').textContent='';
  }
- function reset(){clear();refresh();}
+ function reset(){clear();$('#upskillJobId').value='';refresh();$('#upskillJobId').focus();}
  $('#buildCareerPlan').addEventListener('click',()=>{
   const j=job();
   if(!j){

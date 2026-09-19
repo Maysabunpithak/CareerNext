@@ -1257,3 +1257,11 @@ body { background:#faf8ff; color:#514c60; }
 #upskill #buildCareerPlan { width:100%; padding:14px; }
 @media(max-width:640px){ #upskill {padding:100px 0 32px;} #upskill .upskill-workspace {padding:20px;} #upskillHeading {font-size:1.2rem;} }
 @media print { body.printing-career #upskill {padding:0;} body.printing-career #upskill .upskill-workspace {padding:0;border:0;} }
+.course-interest { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; margin-top:14px; border:1px solid #dacced; border-radius:10px; background:#fff; color:#6843b5; font:inherit; font-size:.9rem; cursor:pointer; }
+.course-interest span { font-size:1.35rem; line-height:1; }
+.course-interest[aria-pressed="true"] { color:#773668; background:#faedf6; border-color:#e6bddb; }
+.course-interest:hover { border-color:#9970c9; }
+.recommended-courses .course-interest { display:flex; width:fit-content; }
+.course-interest-filter { display:flex; align-items:center; gap:10px; margin:24px 0 0; font-weight:600; }
+.training-card[hidden],#noInterestedCourses[hidden] { display:none; }
+@media print { .course-interest { display:none!important; } }
