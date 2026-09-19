@@ -1325,3 +1325,7 @@ body { background:#faf8ff; color:#514c60; }
 #training > .container > .training-intro a { font-weight:500; text-underline-offset:4px; }
 #training > .container > .course-note { max-width:760px; margin:18px auto 24px; font-size:.85rem; line-height:1.8; color:#786b82; text-wrap:balance; }
 @media(max-width:640px){ #training > .container > .training-intro {font-size:.95rem;} #training > .container > .course-note {font-size:.8rem;} }
+/* Stronger text contrast on the lavender cover. */
+.hero .hero-heading { color:#24132f; -webkit-text-fill-color:currentColor; }
+.hero .hero-heading-end { color:#4d206d; }
+.hero .hero-description { color:#39313f; font-weight:500; }
