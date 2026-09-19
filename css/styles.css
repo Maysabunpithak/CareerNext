@@ -1243,3 +1243,17 @@ body { background:#faf8ff; color:#514c60; }
 .upskill-steps li > span { background:#ede2ff; color:#5b378b; font-family:'Arial',sans-serif; font-weight:800; }
 .site-footer strong { font-family:'Arial','Segoe UI',sans-serif; font-weight:800; letter-spacing:-.04em; font-size:1.45rem; }
 @media(max-width:640px){ .logo { font-size:1.45rem; } .logo img { width:32px; height:32px; } .nav-links a { font-size:.85rem; } }
+/* Upskill uses the same clear form proportions as the application. */
+#upskill { padding:108px 0 48px; }
+#upskill > .container { max-width:760px; }
+#upskill .upskill-workspace { margin:0; padding:28px; border-radius:16px; }
+#upskillHeading { font-size:1.45rem; line-height:1.6; padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid var(--border); }
+#upskillControls { display:block; margin-top:24px; }
+#upskillControls label { display:block; font-weight:600; margin-bottom:8px; color:var(--ink); }
+#upskillControls select { width:100%; padding:12px 14px; border:1px solid #d8d2e2; border-radius:10px; background:white; color:var(--ink); font:inherit; }
+#upskill .career-planner { margin:24px 0; padding:0; background:transparent; border:0; }
+#upskill .skill-level-row { border-radius:10px; padding:16px; }
+#upskill .skill-level-row select { max-width:none; padding:12px 14px; border-color:#d8d2e2; border-radius:10px; }
+#upskill #buildCareerPlan { width:100%; padding:14px; }
+@media(max-width:640px){ #upskill {padding:100px 0 32px;} #upskill .upskill-workspace {padding:20px;} #upskillHeading {font-size:1.2rem;} }
+@media print { body.printing-career #upskill {padding:0;} body.printing-career #upskill .upskill-workspace {padding:0;border:0;} }
