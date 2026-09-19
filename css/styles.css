@@ -1032,3 +1032,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .skill-level-row > div { padding:12px 0 0 28px; }
 .skill-picker .skill-level-row > div > label { display:block; border:0; padding:0; margin:0 0 6px; font-size:.85rem; }
 .skill-level-row select { width:100%; max-width:340px; padding:10px; border:1px solid #94a3b8; border-radius:8px; background:white; color:#334155; font:inherit; }
+.team-portrait { width:96px; height:120px; background:#e2e8f0; }
+.team-portrait img { object-position:center 25%; }
+@media(max-width:480px){ .team-portrait { width:76px; height:96px; } .person-header > div:last-child { min-width:0; } }

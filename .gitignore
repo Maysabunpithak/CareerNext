@@ -9,3 +9,6 @@ dist/
 *.zip
 images/*
 !images/opencareers.svg
+
+!images/bunpithak.jpg
+!images/nichapa.png
