@@ -12,7 +12,7 @@ const LearningPlan = (() => {
   mobile:{order:[1,3,2,0],codes:[null,null,null,null]},
   mentor:{order:[1,2,0],codes:[null,null,null]}
  };
- function build(job,levels,tier,catalog){
+ function build(job,levels,catalog){
   const config=mapping[job.id],steps=[];
   if(!config)return steps;
   config.order.forEach((index,order)=>{
@@ -48,7 +48,7 @@ const LearningPlan = (() => {
   const needsAdvancedAI=merged.some(s=>s.course&&['CREATE','SYSTEM'].includes(s.course.code));
   const promptIndex=job.skills.findIndex(s=>/Prompt|Generative AI/i.test(s));
   const promptLevel=promptIndex<0?0:Number(levels[job.skills[promptIndex]]||0);
-  if(needsAdvancedAI&&((promptIndex>=0&&promptLevel===0)||(promptIndex<0&&tier==='Beginner'))&&!merged.some(s=>s.course?.code==='PROMPT')){
+  if(needsAdvancedAI&&((promptIndex>=0&&promptLevel===0)||(promptIndex<0&&job.skills.some(skill=>/RAG|LLM|Generative AI/i.test(skill)&&!levels[skill])))&&!merged.some(s=>s.course?.code==='PROMPT')){
    const course=catalog.find(c=>c.code==='PROMPT');
    if(course)merged.unshift({stage:0,order:-1,title:course.title,skills:['พื้นฐาน Generative AI / Prompt'],level:0,
     reason:'ปูพื้นฐานการใช้และประเมินคำตอบของ AI ก่อนเรียนหลักสูตรประยุกต์หรือออกแบบระบบ',
@@ -70,7 +70,7 @@ const LearningPlan = (() => {
  $('.upskill-workspace').append(results);
  $('#upskillJobId').innerHTML='<option value="">เลือกงานที่สนใจ</option>'+JOBS.map(j=>`<option value="${j.id}">${esc(j.title)}</option>`).join('');
  const job=()=>JOBS.find(j=>j.id===$('#upskillJobId').value);
- const stepsFor=j=>LearningPlan.build(j,levels,$('#upskillTier').value,COURSES);
+ const stepsFor=j=>LearningPlan.build(j,levels,COURSES);
  function stepsHTML(steps){
   if(!steps.length)return '<div class="next-step">คุณระบุว่าเชี่ยวชาญครบทุกด้านแล้ว จึงไม่แนะนำให้เรียนพื้นฐานซ้ำ ลองทำ Portfolio ตามงานที่สนใจและขอให้ผู้มีประสบการณ์ประเมินผลงาน</div>';
   return '<p class="field-help">เรียงจากพื้นฐานที่ยังขาด → ฝึกใช้งาน → ต่อยอดขั้นสูง ภายในแต่ละช่วงเริ่มจากทักษะพื้นฐานของสายงานก่อน ลำดับนี้เป็นแนวทางจากข้อมูลที่คุณระบุ</p><ol class="recommended-courses">'+steps.map((s,i)=>`<li><span class="plan-tier">${i===0?'เริ่มที่นี่':`ลำดับ ${i+1}`} · ${['ปูพื้นฐาน','ฝึกประยุกต์','ต่อยอดขั้นสูง'][s.stage]}${s.optional?' · ทางเลือกเพิ่มเติม':''}</span><h4>${esc(s.title)}</h4><p><strong>พัฒนาด้าน:</strong> ${esc(s.skills.join(' · '))}</p><p>${esc(s.reason)}</p><p class="field-help">${esc(s.practice)}</p><p class="field-help">${esc(s.note)}</p>${s.course?`<p>${s.course.hours} ชั่วโมง · ฿${money(s.course.price)}</p><a class="details-link course-catalog-link" href="#course/${s.course.code}">ดูรายละเอียดหลักสูตร →</a>`:''}</li>`).join('')+'</ol>';
@@ -101,10 +101,10 @@ const LearningPlan = (() => {
   else return;
   updateRecommendations();
  });
- $('#upskillTier').addEventListener('change',()=>{if(job())updateRecommendations();});
+
  $('#upskillJobId').addEventListener('change',()=>{Object.keys(levels).forEach(k=>delete levels[k]);refresh();});
  function plainText(data){
-  return ['OpenCareers — แผนพัฒนาทักษะ',data.job.title,'ระดับ AI: '+data.tier,
+  return ['OpenCareers — แผนพัฒนาทักษะ',data.job.title,
    'ความรู้ที่ระบุ:',...data.job.skills.map(s=>s+': '+LearningPlan.labels[data.levels[s]||0]),
    'ลำดับการเรียน:',...data.steps.map((s,i)=>`${i+1}. ${s.title}\nพัฒนาด้าน: ${s.skills.join(', ')}\n${s.reason}\n${s.practice}\n${s.note}${s.optional?' (ทางเลือกเพิ่มเติม)':''}`),
    data.steps.length?'':'เชี่ยวชาญครบทุกด้านตามที่ระบุ: เตรียม Portfolio และขอข้อเสนอแนะ',
@@ -114,15 +114,15 @@ const LearningPlan = (() => {
   Object.keys(levels).forEach(k=>delete levels[k]);report=null;results.innerHTML='';results.hidden=true;
   $('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;$('#planError').textContent='';
  }
- function reset(){clear();$('#upskillTier').value='';refresh();}
+ function reset(){clear();refresh();}
  $('#buildCareerPlan').addEventListener('click',()=>{
-  const j=job(),tier=$('#upskillTier').value;
-  if(!j||!['Beginner','Pioneer','Innovator'].includes(tier)){
-   $('#planError').textContent='กรุณาเลือกงานและระดับ AI ก่อนสร้างแผน';(!j?$('#upskillJobId'):$('#upskillTier')).focus();return;
+  const j=job();
+  if(!j){
+   $('#planError').textContent='กรุณาเลือกงานที่สนใจก่อนสร้างแผน';$('#upskillJobId').focus();return;
   }
   $('#planError').textContent='';
-  report={job:j,tier,levels:{...levels},steps:stepsFor(j)};
-  results.innerHTML=`<div class="summary-heading"><h3>แผนพัฒนาทักษะของคุณ</h3><h4>${esc(j.title)}</h4><p>ระดับ AI: ${esc(tier)}</p></div><ul>${j.skills.map(s=>`<li>${esc(s)} — ${LearningPlan.labels[levels[s]||0]}</li>`).join('')}</ul>${overview(j)}${stepsHTML(report.steps)}<p class="field-help">ดาวน์โหลดแผนเก็บไว้ได้ แผนจะหายเมื่อรีเฟรชหน้า</p><div class="summary-actions"><button type="button" class="apply-btn" id="printCareerSummary">พิมพ์ / บันทึก PDF</button><button type="button" class="apply-btn" id="downloadCareerSummary">ดาวน์โหลดสรุป (.txt)</button><button type="button" class="apply-btn" id="editCareerPlan">ปรับระดับความรู้</button><button type="button" class="apply-btn" id="newCareerPlan">เริ่มแผนใหม่</button></div>`;
+  report={job:j,levels:{...levels},steps:stepsFor(j)};
+  results.innerHTML=`<div class="summary-heading"><h3>แผนพัฒนาทักษะของคุณ</h3><h4>${esc(j.title)}</h4></div><ul>${j.skills.map(s=>`<li>${esc(s)} — ${LearningPlan.labels[levels[s]||0]}</li>`).join('')}</ul>${overview(j)}${stepsHTML(report.steps)}<p class="field-help">ดาวน์โหลดแผนเก็บไว้ได้ แผนจะหายเมื่อรีเฟรชหน้า</p><div class="summary-actions"><button type="button" class="apply-btn" id="printCareerSummary">พิมพ์ / บันทึก PDF</button><button type="button" class="apply-btn" id="downloadCareerSummary">ดาวน์โหลดสรุป (.txt)</button><button type="button" class="apply-btn" id="editCareerPlan">ปรับระดับความรู้</button><button type="button" class="apply-btn" id="newCareerPlan">เริ่มแผนใหม่</button></div>`;
   planner.innerHTML='';$('#upskillControls').hidden=true;$('#buildCareerPlan').hidden=true;results.hidden=false;
   $('#printCareerSummary').addEventListener('click',()=>{document.body.classList.add('printing-career');try{window.print();}finally{document.body.classList.remove('printing-career');}});
   $('#downloadCareerSummary').addEventListener('click',()=>{
@@ -135,7 +135,7 @@ const LearningPlan = (() => {
  });
  document.addEventListener('click',event=>{
   const button=event.target.closest('[data-upskill]');if(!button)return;
-  clear();$('#upskillJobId').value=button.dataset.upskill;$('#upskillTier').value='';refresh();
+  clear();$('#upskillJobId').value=button.dataset.upskill;refresh();
   location.hash='upskill';setTimeout(()=>$('#upskillHeading').focus(),0);
  });
  refresh();
