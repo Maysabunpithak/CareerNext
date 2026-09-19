@@ -1,5 +1,5 @@
 'use strict';
-// Educational sample vacancies; not live recruitment listings.
+// Educational sample vacancies and compensation; not live recruitment listings.
 const JOBS = [
   {
     "id": "frontend",
@@ -251,5 +251,473 @@ const JOBS = [
       "เครือข่ายอาสาสมัคร"
     ],
     "contact": "volunteer@techcommunity.example"
+  },
+  {
+    "id": "ml-engineer",
+    "title": "Machine Learning Engineer",
+    "company": "ModelWorks",
+    "logo": "MW",
+    "color": "tech-innovate",
+    "type": "fulltime",
+    "level": "expert",
+    "min": 55000,
+    "max": 95000,
+    "location": "กรุงเทพฯ / Bangkok, Thailand",
+    "date": "2026-09-19",
+    "summary": "สร้างและนำโมเดล Machine Learning ไปใช้งานจริง",
+    "duties": [
+      "เตรียมข้อมูลและเปรียบเทียบโมเดลด้วยชุดทดสอบ",
+      "ติดตามคุณภาพโมเดลหลังนำไปใช้งาน",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มีประสบการณ์ Python และพัฒนาโมเดลพร้อมอธิบายผลการประเมินได้",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Python",
+      "Machine Learning / Statistics",
+      "Model Deployment",
+      "Model Evaluation"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@ml-engineer.example"
+  },
+  {
+    "id": "prompt-specialist",
+    "title": "Prompt Engineer",
+    "company": "PromptLab",
+    "logo": "PL",
+    "color": "cloud-tech",
+    "type": "fulltime",
+    "level": "intermediate",
+    "min": 35000,
+    "max": 65000,
+    "location": "ออนไลน์ / Remote, Thailand",
+    "date": "2026-09-19",
+    "summary": "ออกแบบ Prompt และประเมินผลลัพธ์ Generative AI",
+    "duties": [
+      "พัฒนา Prompt พร้อมบริบท ตัวอย่าง และเงื่อนไข",
+      "ทดสอบความถูกต้องและความสม่ำเสมอของคำตอบ",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มี Portfolio การทดลอง Prompt และเกณฑ์ตรวจผลลัพธ์",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Prompt Engineering",
+      "Test Design",
+      "Output Analysis",
+      "AI Ethics"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@prompt-specialist.example"
+  },
+  {
+    "id": "ai-product",
+    "title": "AI Product Manager",
+    "company": "FutureFlow",
+    "logo": "FF",
+    "color": "data-analytics",
+    "type": "fulltime",
+    "level": "expert",
+    "min": 60000,
+    "max": 100000,
+    "location": "ปทุมธานี / Pathum Thani, Thailand",
+    "date": "2026-09-19",
+    "summary": "วางทิศทางผลิตภัณฑ์ AI ให้ตอบโจทย์ผู้ใช้และธุรกิจ",
+    "duties": [
+      "กำหนดปัญหา Roadmap และตัวชี้วัด",
+      "ประสานทีมออกแบบ วิศวกรรม และธุรกิจ",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มีประสบการณ์ดูแลผลิตภัณฑ์ดิจิทัลและเข้าใจข้อจำกัดของ AI",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "User Research",
+      "Product Strategy",
+      "AI System Design",
+      "AI Ethics"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@ai-product.example"
+  },
+  {
+    "id": "ux-designer",
+    "title": "AI Product UX/UI Designer",
+    "company": "PixelMind",
+    "logo": "PM",
+    "color": "tech-innovate",
+    "type": "fulltime",
+    "level": "intermediate",
+    "min": 35000,
+    "max": 60000,
+    "location": "เชียงใหม่ / Chiang Mai, Thailand",
+    "date": "2026-09-19",
+    "summary": "ออกแบบประสบการณ์ใช้งานผลิตภัณฑ์ AI ที่เข้าใจง่าย",
+    "duties": [
+      "สัมภาษณ์ผู้ใช้และสร้างต้นแบบด้วย Figma",
+      "ทดสอบการใช้งานและปรับปรุงการเข้าถึง",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มี Portfolio UX/UI พร้อมเหตุผลการออกแบบและผลทดสอบ",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "User Research",
+      "Figma / Prototyping",
+      "Interaction Design",
+      "Accessibility"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@ux-designer.example"
+  },
+  {
+    "id": "bi-analyst",
+    "title": "Business Intelligence Analyst",
+    "company": "InsightBridge",
+    "logo": "IB",
+    "color": "cloud-tech",
+    "type": "fulltime",
+    "level": "intermediate",
+    "min": 30000,
+    "max": 55000,
+    "location": "กรุงเทพฯ / Bangkok, Thailand",
+    "date": "2026-09-19",
+    "summary": "แปลงข้อมูลธุรกิจเป็น Dashboard เพื่อช่วยตัดสินใจ",
+    "duties": [
+      "เขียน SQL และตรวจคุณภาพข้อมูล",
+      "สร้าง Dashboard พร้อมอธิบายแนวโน้มและข้อจำกัด",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "ใช้ SQL และ Power BI ได้พร้อมตัวอย่างผลงาน",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "SQL",
+      "Power BI",
+      "Business Analysis",
+      "Data Quality"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@bi-analyst.example"
+  },
+  {
+    "id": "ai-qa",
+    "title": "AI Software QA Engineer",
+    "company": "QualityLoop",
+    "logo": "QL",
+    "color": "data-analytics",
+    "type": "fulltime",
+    "level": "intermediate",
+    "min": 32000,
+    "max": 60000,
+    "location": "ออนไลน์ / Remote, Thailand",
+    "date": "2026-09-19",
+    "summary": "ทดสอบซอฟต์แวร์และผลลัพธ์ AI ตามข้อกำหนด",
+    "duties": [
+      "ออกแบบ Test Case และเกณฑ์ตรวจคำตอบ",
+      "สร้างชุดทดสอบอัตโนมัติและรายงานข้อผิดพลาด",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "เข้าใจการทดสอบซอฟต์แวร์และใช้เครื่องมือ Automation Testing",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Software Testing",
+      "Test Automation",
+      "LLM Evaluation",
+      "AI Ethics"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@ai-qa.example"
+  },
+  {
+    "id": "mlops",
+    "title": "MLOps Engineer",
+    "company": "CloudModel",
+    "logo": "CM",
+    "color": "tech-innovate",
+    "type": "fulltime",
+    "level": "expert",
+    "min": 55000,
+    "max": 100000,
+    "location": "ปทุมธานี / Pathum Thani, Thailand",
+    "date": "2026-09-19",
+    "summary": "ดูแลโครงสร้างพื้นฐานสำหรับส่งมอบโมเดล AI",
+    "duties": [
+      "สร้าง Pipeline ฝึก ทดสอบ และปล่อยโมเดล",
+      "ติดตามต้นทุน ความพร้อมใช้งาน และคุณภาพโมเดล",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มีประสบการณ์ Cloud, Container และ CI/CD",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Python / Linux",
+      "Docker / Kubernetes",
+      "CI/CD for ML",
+      "Model Monitoring"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@mlops.example"
+  },
+  {
+    "id": "security-analyst",
+    "title": "Digital Security Analyst",
+    "company": "SecureNext",
+    "logo": "SN",
+    "color": "cloud-tech",
+    "type": "fulltime",
+    "level": "intermediate",
+    "min": 35000,
+    "max": 65000,
+    "location": "เชียงใหม่ / Chiang Mai, Thailand",
+    "date": "2026-09-19",
+    "summary": "เฝ้าระวังภัยคุกคามของระบบดิจิทัล",
+    "duties": [
+      "วิเคราะห์ Log และคัดกรองเหตุการณ์ผิดปกติ",
+      "จัดทำขั้นตอนตอบสนองเหตุการณ์และรายงานช่องโหว่",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "เข้าใจเครือข่าย ระบบปฏิบัติการ และความปลอดภัยข้อมูล",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Network Security",
+      "Log Analysis / SIEM",
+      "Incident Response",
+      "Data Privacy"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@security-analyst.example"
+  },
+  {
+    "id": "chatbot",
+    "title": "AI Chatbot Developer",
+    "company": "Converse Studio",
+    "logo": "CS",
+    "color": "data-analytics",
+    "type": "project",
+    "level": "intermediate",
+    "min": 40000,
+    "max": 75000,
+    "location": "กรุงเทพฯ / Bangkok, Thailand",
+    "date": "2026-09-19",
+    "summary": "พัฒนา Chatbot เชื่อมข้อมูลธุรกิจอย่างมีขอบเขต",
+    "duties": [
+      "เชื่อม API และแหล่งความรู้สำหรับระบบสนทนา",
+      "ทดสอบคำตอบและขั้นตอนส่งต่อเจ้าหน้าที่",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มีตัวอย่าง Chatbot หรือระบบ API ที่พัฒนาเอง",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Python / JavaScript",
+      "REST API",
+      "Prompt Engineering",
+      "RAG / AI System Design"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@chatbot.example"
+  },
+  {
+    "id": "automation",
+    "title": "No-Code Automation Specialist",
+    "company": "FlowCraft",
+    "logo": "FC",
+    "color": "tech-innovate",
+    "type": "fulltime",
+    "level": "entry",
+    "min": 28000,
+    "max": 50000,
+    "location": "ออนไลน์ / Remote, Thailand",
+    "date": "2026-09-19",
+    "summary": "สร้างระบบอัตโนมัติเพื่อลดงานซ้ำของทีมธุรกิจ",
+    "duties": [
+      "วิเคราะห์กระบวนการและเชื่อมเครื่องมือผ่าน Webhook",
+      "ทดสอบข้อผิดพลาดและเขียนคู่มือดูแล Workflow",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "เคยสร้าง Workflow ด้วย Make หรือ Zapier",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Process Mapping",
+      "Make / Zapier",
+      "API / Webhooks",
+      "AI Workflow Design"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@automation.example"
+  },
+  {
+    "id": "ai-video",
+    "title": "AI Video & Creative Producer",
+    "company": "MotionSpark",
+    "logo": "MS",
+    "color": "cloud-tech",
+    "type": "parttime",
+    "level": "entry",
+    "min": 25000,
+    "max": 45000,
+    "location": "ปทุมธานี / Pathum Thani, Thailand",
+    "date": "2026-09-19",
+    "summary": "ผลิตสื่อวิดีโอร่วมกับเครื่องมือ AI",
+    "duties": [
+      "วาง Storyboard และผลิตสื่อหลายรูปแบบ",
+      "ตัดต่อ ตรวจคุณภาพ และสิทธิ์ใช้งานก่อนเผยแพร่",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "มี Portfolio วิดีโอและเข้าใจการสื่อสารกับกลุ่มเป้าหมาย",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Content Planning",
+      "Generative AI for Media",
+      "Video Editing",
+      "Copyright / AI Ethics"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@ai-video.example"
+  },
+  {
+    "id": "data-intern",
+    "title": "Data Analytics Intern",
+    "company": "DataSpring",
+    "logo": "DP",
+    "color": "data-analytics",
+    "type": "internship",
+    "level": "entry",
+    "min": 12000,
+    "max": 18000,
+    "location": "เชียงใหม่ / Chiang Mai, Thailand",
+    "date": "2026-09-19",
+    "summary": "ฝึกวิเคราะห์ข้อมูลภายใต้การดูแลของทีมข้อมูล",
+    "duties": [
+      "ทำความสะอาดข้อมูลและสรุปแนวโน้ม",
+      "สร้างกราฟและตรวจสอบตัวเลขก่อนนำเสนอ",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "กำลังศึกษาด้านข้อมูล คอมพิวเตอร์ ธุรกิจ หรือที่เกี่ยวข้อง และใช้ Excel ได้",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "Excel",
+      "SQL",
+      "Data Visualization",
+      "สถิติพื้นฐาน"
+    ],
+    "benefits": [
+      "พี่เลี้ยงให้คำแนะนำ",
+      "หนังสือรับรองการฝึกงาน",
+      "ร่วมทำโครงการในทีม"
+    ],
+    "contact": "careers@data-intern.example"
+  },
+  {
+    "id": "ai-governance",
+    "title": "AI Governance Associate",
+    "company": "ResponsibleAI",
+    "logo": "RA",
+    "color": "tech-innovate",
+    "type": "fulltime",
+    "level": "intermediate",
+    "min": 40000,
+    "max": 70000,
+    "location": "กรุงเทพฯ / Bangkok, Thailand",
+    "date": "2026-09-19",
+    "summary": "วางแนวทางใช้ AI อย่างรับผิดชอบ",
+    "duties": [
+      "จัดทำทะเบียนระบบ AI และประเมินความเสี่ยง",
+      "ประสานทีมเพื่อจัดทำแนวทางใช้งานและหลักฐานตรวจสอบ",
+      "ทำงานร่วมกับทีมและตรวจสอบผลงานก่อนส่งมอบ"
+    ],
+    "qualifications": [
+      "เข้าใจจริยธรรม AI การจัดการความเสี่ยง และการเขียนนโยบาย",
+      "สื่อสารและทำงานร่วมกับทีมได้ พร้อมเรียนรู้เครื่องมือใหม่",
+      "รับผิดชอบต่อข้อมูลและตรวจสอบความถูกต้องของผลงาน"
+    ],
+    "skills": [
+      "AI Ethics / Risk Assessment",
+      "Data Privacy",
+      "Policy Documentation",
+      "Human-Centered AI"
+    ],
+    "benefits": [
+      "งบพัฒนาทักษะ",
+      "รูปแบบการทำงานตามข้อตกลง",
+      "เครื่องมือที่จำเป็นสำหรับงาน"
+    ],
+    "contact": "careers@ai-governance.example"
   }
 ];

@@ -4,6 +4,19 @@ const LearningPlan = (() => {
  const labels=['ยังไม่รู้ / ยังไม่ได้ระบุ','รู้พื้นฐาน','ใช้งานได้','เชี่ยวชาญ'];
  // Entries follow each role's skills; order expresses suggested prerequisites.
  const mapping={
+"ml-engineer":{"order":[0,1,2,3],"codes":[null,null,null,null]},
+"prompt-specialist":{"order":[0,1,2,3],"codes":["PROMPT",null,null,"ETHICS"]},
+"ai-product":{"order":[0,1,2,3],"codes":["HUMAN",null,"SYSTEM","ETHICS"]},
+"ux-designer":{"order":[0,1,2,3],"codes":["HUMAN",null,null,null]},
+"bi-analyst":{"order":[0,1,2,3],"codes":[null,null,null,null]},
+"ai-qa":{"order":[0,1,2,3],"codes":[null,null,null,"ETHICS"]},
+"mlops":{"order":[0,1,2,3],"codes":[null,null,null,null]},
+"security-analyst":{"order":[0,1,2,3],"codes":[null,null,null,"ETHICS"]},
+"chatbot":{"order":[0,1,2,3],"codes":[null,null,"PROMPT","SYSTEM"]},
+"automation":{"order":[0,1,2,3],"codes":[null,null,null,"SYSTEM"]},
+"ai-video":{"order":[0,1,2,3],"codes":[null,"CREATE",null,"ETHICS"]},
+"data-intern":{"order":[0,1,2,3],"codes":[null,null,null,null]},
+"ai-governance":{"order":[0,1,2,3],"codes":["ETHICS","ETHICS",null,"HUMAN"]},
   frontend:{order:[0,3,1,2],codes:[null,null,'PROMPT',null]},
   devops:{order:[0,3,2,1],codes:['PROMPT','SYSTEM',null,'ETHICS']},
   data:{order:[0,1,3,2],codes:[null,null,'SYSTEM','ETHICS']},
