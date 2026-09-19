@@ -55,7 +55,7 @@ $('#resetSearch').addEventListener('click',resetSearch);
 const form=$('#jobApplicationForm'),modal=$('#applyModal'),success=$('#successMessage');
 const fields=['prefix','fullname','phone','email','address','education','aiTier','applicationJobId','consent'];
 $('#applicationJobId').innerHTML='<option value="">เลือกตำแหน่งงาน</option>'+JOBS.map(j=>`<option value="${j.id}">${esc(j.title)}</option>`).join('');
-$('#registerTalent').addEventListener('click',()=>openModal());
+
 $('#applicationJobId').addEventListener('change',()=>{currentJob=JOBS.find(j=>j.id===$('#applicationJobId').value)||null;});
 fields.forEach(id=>{
  const el=$('#'+id),errorId='error'+id[0].toUpperCase()+id.slice(1);
