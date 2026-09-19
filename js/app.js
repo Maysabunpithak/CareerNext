@@ -164,3 +164,10 @@ $('#resume').addEventListener('change',()=>{
  $('#removeResume').hidden=!file;
 });
 $('#removeResume').addEventListener('click',()=>{resetResume();$('#resume').focus();});
+const motionToggle=$('#motionToggle');
+motionToggle.addEventListener('click',()=>{
+ const paused=$('.hero').classList.toggle('motion-paused');
+ motionToggle.setAttribute('aria-pressed',String(paused));
+ motionToggle.setAttribute('aria-label',paused?'เล่นภาพเคลื่อนไหวพื้นหลัง':'หยุดภาพเคลื่อนไหวพื้นหลัง');
+ motionToggle.textContent=paused?'เปิดการเคลื่อนไหว':'หยุดการเคลื่อนไหว';
+});

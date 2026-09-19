@@ -1175,3 +1175,20 @@ h1,h2,h3,h4 { line-height:1.45; }
  #teamContacts .person-card { padding:24px; }
 }
 @media print { .upskill-steps { display:none; } .recommended-courses > li:first-child { box-shadow:none; } }
+/* Quiet ambient motion behind the hero content. */
+.hero::after { display:none; }
+.hero-motion { position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:inherit; }
+.hero-glow { position:absolute; width:48%; height:95%; border-radius:50%; opacity:.7; }
+.hero-glow-one { top:-35%; left:-10%; background:radial-gradient(ellipse,#7c3aed38,transparent 68%); animation:hero-drift 16s ease-in-out infinite alternate; }
+.hero-glow-two { right:-8%; bottom:-45%; background:radial-gradient(ellipse,#22d3ee26,transparent 68%); animation:hero-drift 20s ease-in-out infinite alternate-reverse; }
+.hero-orbit { position:absolute; width:350px; height:350px; border:1px solid #67e8f921; border-radius:50%; top:-30px; right:1%; animation:hero-orbit-turn 32s linear infinite; }
+.hero-orbit::before { content:""; position:absolute; width:5px; height:5px; top:48px; left:48px; border-radius:50%; background:#67e8f9; box-shadow:0 0 14px #67e8f980; }
+.hero-orbit-two { width:470px; height:470px; top:-90px; right:-60px; border-color:#a78bfa18; animation-duration:44s; animation-direction:reverse; }
+.hero-orbit-two::before { background:#a78bfa; top:67px; left:67px; }
+.motion-toggle { position:absolute; z-index:3; bottom:12px; right:20px; border:1px solid #ffffff25; border-radius:6px; padding:4px 9px; background:#11162d; color:#aeb7cf; font:inherit; font-size:.7rem; cursor:pointer; }
+.motion-toggle:hover { color:white; border-color:#67e8f9; }
+.hero.motion-paused .hero-motion * { animation-play-state:paused!important; }
+@keyframes hero-drift { from { transform:translate3d(0,0,0); } to { transform:translate3d(16%,12%,0); } }
+@keyframes hero-orbit-turn { to { transform:rotate(360deg); } }
+@media(max-width:640px){ .hero-orbit { opacity:.55; } .motion-toggle { right:16px; bottom:8px; font-size:.65rem; } }
+@media(prefers-reduced-motion:reduce){ .hero-motion * { animation:none!important; } .motion-toggle { display:none; } }
