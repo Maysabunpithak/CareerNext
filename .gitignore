@@ -1,0 +1,11 @@
+﻿node_modules/
+.preview-tools/
+backup-original/
+qa/
+output/
+submission/
+dist/
+*.pdf
+*.zip
+images/*
+!images/opencareers.svg
