@@ -30,7 +30,7 @@
           <h1>ค้นพบงานที่ใช่ เติบโตไปกับ AI</h1>
           <p>ค้นหางาน AI และดิจิทัล พร้อม Upskill / Reskill เพื่อโอกาสใหม่ของคุณ</p>
           <form class="search-box" id="searchForm" role="search">
-            <input type="text" class="search-input" aria-label="ตำแหน่งงานหรือคำค้น" placeholder="ตำแหน่งงานหรือคำค้น" id="searchInput" />
+            <div class="location-combobox"><input type="text" class="search-input" aria-label="ตำแหน่งงานหรือคำค้น" placeholder="พิมพ์หรือเลือกตำแหน่งงาน" id="searchInput" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="jobOptions" autocomplete="off" /><button type="button" class="location-toggle" aria-label="แสดงรายการตำแหน่งงาน" aria-controls="jobOptions" aria-expanded="false">▾</button><ul id="jobOptions" class="location-options" role="listbox" aria-label="ตำแหน่งงาน" hidden></ul></div>
             <div class="location-combobox">
               <input type="text" class="search-input" aria-label="จังหวัดหรือเมือง" placeholder="พิมพ์หรือเลือกจังหวัด / เมือง" id="locationInput" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="locationOptions" autocomplete="off" />
               <button type="button" class="location-toggle" aria-label="แสดงรายการสถานที่" aria-controls="locationOptions" aria-expanded="false">▾</button>

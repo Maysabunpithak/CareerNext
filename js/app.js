@@ -104,15 +104,14 @@ $$('.training-card').forEach(el=>el.classList.add('show'));
 renderJobs();route();
 
 /* Editable location combobox anchored below its input. */
-(()=>{
- const input=$('#locationInput'), list=$('#locationOptions'), box=input.closest('.location-combobox'), toggle=$('.location-toggle',box);
- const places=[...new Set(JOBS.map(j=>j.location))];
+function setupSearchCombobox(inputId,listId,places,emptyMessage){
+ const input=$(inputId), list=$(listId), box=input.closest('.location-combobox'), toggle=$('.location-toggle',box);
  let active=-1, visible=[];
  function close(){list.hidden=true;input.setAttribute('aria-expanded','false');toggle.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');active=-1;}
  function open(all=false){
   visible=places.filter(p=>all||p.toLowerCase().includes(input.value.trim().toLowerCase()));
   active=-1;input.removeAttribute('aria-activedescendant');
-  list.innerHTML=visible.length?visible.map((p,i)=>`<li role="option" id="location-option-${i}" data-location-index="${i}" aria-selected="false">${esc(p)}</li>`).join(''):'<li class="location-empty" role="presentation">ไม่พบในรายการ — พิมพ์สถานที่แล้วกดค้นหางานได้</li>';
+  list.innerHTML=visible.length?visible.map((p,i)=>`<li role="option" id="${list.id}-option-${i}" data-location-index="${i}" aria-selected="false">${esc(p)}</li>`).join(''):'<li class="location-empty" role="presentation">'+esc(emptyMessage)+'</li>';
   list.hidden=false;input.setAttribute('aria-expanded','true');toggle.setAttribute('aria-expanded','true');
  }
  function choose(i){if(!visible[i])return;input.value=visible[i];close();input.focus();}
@@ -133,7 +132,9 @@ renderJobs();route();
  document.addEventListener('pointerdown',e=>{if(!box.contains(e.target))close();});
  $('#searchForm').addEventListener('submit',close);
  $('#searchForm').addEventListener('reset',close);
-})();
+}
+setupSearchCombobox('#locationInput','#locationOptions',[...new Set(JOBS.map(j=>j.location))],'ไม่พบในรายการ — พิมพ์สถานที่แล้วกดค้นหางานได้');
+setupSearchCombobox('#searchInput','#jobOptions',JOBS.map(j=>j.title),'ไม่พบในรายการ — พิมพ์คำค้นแล้วกดค้นหางานได้');
 function validateResume(file){
  if(!file)return '';
  if(!/\.(pdf|doc|docx)$/i.test(file.name))return 'กรุณาเลือกไฟล์ PDF, DOC หรือ DOCX';
