@@ -985,7 +985,7 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 @media(max-width:640px) { .skill-comparison { grid-template-columns: 1fr; } .career-planner { padding: 14px; } .summary-actions button { width:100%; } }
 @media print {
  body.printing-career { background: #fff; color: #111; }
- body.printing-career > :not(#applyModal) { display: none !important; }
+ body.printing-career > :not(.main) { display: none !important; }
  body.printing-career .modal { position: static; display: block; padding: 0; background: none; }
  body.printing-career .modal-content { display: block; max-width: none; max-height: none; overflow: visible; box-shadow: none; animation: none; }
  body.printing-career .modal-body { overflow: visible; padding: 12px; }
@@ -1005,3 +1005,20 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .location-options [role="option"] { padding: 10px 12px; border-radius: 7px; font-size: .9rem; line-height: 1.5; overflow-wrap: anywhere; cursor: pointer; }
 .location-options [role="option"]:hover, .location-options [aria-selected="true"] { background: #eff6ff; color: #1d4ed8; }
 .location-empty { padding: 12px; font-size: .85rem; color: #64748b; }
+.upskill-workspace { background:#fff; padding:24px; border:1px solid #dbeafe; border-radius:16px; margin:24px 0 40px; }
+.upskill-workspace .form-grid { margin-top:20px; }
+.upskill-workspace [hidden] { display:none!important; }
+.upskill-link { display:block; margin-top:16px; padding:12px 0; color:#1d4ed8; background:none; border:0; font:inherit; cursor:pointer; }
+.resume-field { margin:20px 0; padding:16px; border:1px dashed #94a3b8; border-radius:12px; }
+.resume-field input { max-width:100%; }
+#resumeStatus { overflow-wrap:anywhere; }
+@media print {
+ body.printing-career > .main { display:block!important; }
+ body.printing-career > #applyModal { display:none!important; }
+ body.printing-career .main > :not(#training),
+ body.printing-career #training > .container > :not(.upskill-workspace),
+ body.printing-career .upskill-workspace > :not(#careerResults) { display:none!important; }
+ body.printing-career #training { display:block!important; padding:0; }
+ body.printing-career .upskill-workspace { border:0; margin:0; padding:0; }
+ body.printing-career .container { max-width:none; padding:0; }
+}

@@ -17,9 +17,10 @@
   };
   const results = document.createElement('section');
   results.id = 'careerResults'; results.hidden = true;
-  results.setAttribute('aria-label', 'สรุปการลงทะเบียนและแผนพัฒนาทักษะ');
+  results.setAttribute('aria-label', 'สรุปแผนพัฒนาทักษะ');
   // Keep the confirmation visible when the completed form is hidden.
-  form.after(success, results);
+  $('.upskill-workspace').append(results);
+$('#upskillJobId').innerHTML='<option value="">เลือกงานที่สนใจ</option>'+JOBS.map(j=>`<option value="${j.id}">${esc(j.title)}</option>`).join('');
 
   function recommendations(job, tier) {
     if (!tierCourses[tier]) return [];
@@ -57,11 +58,11 @@
     return `<ol class="recommended-courses">${courses.map(c => `<li><span class="plan-tier">${esc(c.dimension)}</span><h4>${esc(c.title)}</h4><p>${esc(c.reason)}</p><p class="field-help">${c.hours} ชั่วโมง · ฿${money(c.price)}</p><button type="button" class="course-more" data-course-preview="${c.code}">อ่านรายละเอียดหลักสูตร</button><div id="preview-${c.code}" hidden><p>${esc(c.description)}</p><p><strong>สิ่งที่จะได้รับ:</strong> ${esc(c.outcome)}</p></div></li>`).join('')}</ol>`;
   }
   function refresh() {
-    const job = JOBS.find(j => j.id === $('#applicationJobId').value);
-    const tier = $('#aiTier').value;
+    const job = JOBS.find(j => j.id === $('#upskillJobId').value);
+    const tier = $('#upskillTier').value;
     let html = '<h3>เส้นทางพัฒนาทักษะของคุณ</h3><p class="field-help">เลือกงานและระดับ AI เพื่อดูทักษะที่ต้องใช้และหลักสูตรที่เกี่ยวข้อง</p>';
     if (job) {
-      html += `<fieldset class="skill-picker"><legend>ทักษะที่คุณมีสำหรับ ${esc(job.title)} (เลือกได้หลายข้อ)</legend><p class="field-help">เลือกเฉพาะกลุ่มที่คุณมั่นใจ ไม่จำเป็นต้องเลือกเพื่อสมัครงาน</p>${job.skills.map((skill, i) => `<label><input type="checkbox" data-skill-index="${i}" ${selected.has(skill) ? 'checked' : ''}> <span>${esc(skill)}</span></label>`).join('')}</fieldset><div id="skillComparison">${comparisonHTML(job, comparison(job))}</div>`;
+      html += `<fieldset class="skill-picker"><legend>ทักษะที่คุณมีสำหรับ ${esc(job.title)} (เลือกได้หลายข้อ)</legend><p class="field-help">เลือกเฉพาะกลุ่มที่คุณมั่นใจ ใช้เพื่อวางแผนเรียนเท่านั้น</p>${job.skills.map((skill, i) => `<label><input type="checkbox" data-skill-index="${i}" ${selected.has(skill) ? 'checked' : ''}> <span>${esc(skill)}</span></label>`).join('')}</fieldset><div id="skillComparison">${comparisonHTML(job, comparison(job))}</div>`;
     }
     if (tierCourses[tier]) {
       html += '<h3>หลักสูตรที่แนะนำสำหรับคุณ</h3>' + courseHTML(recommendations(job, tier));
@@ -72,16 +73,16 @@
   planner.addEventListener('change', event => {
     const input = event.target.closest('[data-skill-index]');
     if (!input) return;
-    const job = JOBS.find(j => j.id === $('#applicationJobId').value);
+    const job = JOBS.find(j => j.id === $('#upskillJobId').value);
     const skill = job?.skills[Number(input.dataset.skillIndex)];
     if (!skill) return;
     input.checked ? selected.add(skill) : selected.delete(skill);
     // Update only the comparison so keyboard focus stays on the checkbox.
     $('#skillComparison').innerHTML = comparisonHTML(job, comparison(job));
   });
-  $('#aiTier').addEventListener('change', refresh);
-  $('#applicationJobId').addEventListener('change', refresh);
-  modal.addEventListener('click', event => {
+  $('#upskillTier').addEventListener('change', refresh);
+  $('#upskillJobId').addEventListener('change',()=>{selected.clear();refresh();});
+  $('#training').addEventListener('click', event => {
     const button = event.target.closest('[data-course-preview]');
     if (!button) return;
     const panel = button.nextElementSibling;
@@ -91,7 +92,7 @@
   });
 
   function plainText(data) {
-    return ['OpenCareers — สรุปแผนสมัครงานและพัฒนาทักษะ AI',
+    return ['OpenCareers — สรุปแผนพัฒนาทักษะ AI',
       `ตำแหน่ง: ${data.job.title}`, `บริษัท: ${data.job.company}`, `ระดับ AI ที่ประเมินตนเอง: ${data.tier}`,
       `ทักษะที่ระบุว่ามี (${data.matched.length}/${data.job.skills.length} กลุ่ม):`,
       ...data.matched.map(s => '- ' + s),
@@ -103,13 +104,13 @@
   }
   function complete(job, data) {
     report = { job, tier: data.aiTier, ...comparison(job), courses: recommendations(job, data.aiTier) };
-    results.innerHTML = `<div class="summary-heading"><span class="plan-tier">YOUR NEXT STEP</span><h3>แผนสมัครงานและพัฒนาทักษะของคุณ</h3><h4>${esc(job.title)}</h4><p>${esc(job.company)} · ระดับ AI: ${esc(data.aiTier)}</p></div>
+    results.innerHTML = `<div class="summary-heading"><span class="plan-tier">YOUR NEXT STEP</span><h3>แผนพัฒนาทักษะของคุณ</h3><h4>${esc(job.title)}</h4><p>${esc(job.company)} · ระดับ AI: ${esc(data.aiTier)}</p></div>
       ${comparisonHTML(job, report)}<h3>เส้นทางเรียนที่แนะนำ</h3>${courseHTML(report.courses)}
       <p class="next-step">ขั้นถัดไป: ทบทวนทักษะ → เรียนเพิ่มเติม → สร้างผลงาน → เตรียมสมัครงาน</p>
-      <p class="field-help">สรุปนี้ไม่รวมชื่อหรือข้อมูลติดต่อ และจะหายเมื่อปิดหน้าต่างนี้ ดาวน์โหลดเก็บไว้ได้ก่อนปิด ไม่ใช่ผลสอบหรือการสมัครงานจริง</p>
+      <p class="field-help">สรุปนี้ไม่รวมชื่อหรือข้อมูลติดต่อ และจะหายเมื่อรีเฟรชหน้า ดาวน์โหลดเก็บไว้ได้ ไม่ใช่ผลสอบหรือการสมัครงานจริง</p>
       <div class="summary-actions"><button type="button" class="apply-btn" id="printCareerSummary">พิมพ์ / บันทึก PDF</button><button type="button" class="apply-btn" id="downloadCareerSummary">ดาวน์โหลดสรุป (.txt)</button><button type="button" class="apply-btn" id="newCareerPlan">เริ่มแผนใหม่</button></div>`;
     // Remove the draft before showing the summary: IDs and course previews remain unique.
-    planner.innerHTML = ''; form.hidden = true; results.hidden = false;
+    planner.innerHTML = ''; $('#upskillControls').hidden=true;$('#buildCareerPlan').hidden=true;results.hidden = false;
     $('#printCareerSummary').addEventListener('click', () => {
       document.body.classList.add('printing-career');
       try { window.print(); } finally { document.body.classList.remove('printing-career'); }
@@ -119,13 +120,22 @@
       const a = document.createElement('a'); a.href = url; a.download = `OpenCareers-plan-${report.job.id}.txt`;
       document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
-    $('#newCareerPlan').addEventListener('click', () => { openModal(job.id); });
-    $('.modal-body').scrollTop = 0;
+    $('#newCareerPlan').addEventListener('click', reset);
+    results.setAttribute('tabindex','-1');results.focus();
   }
   function clear() {
-    selected.clear(); report = null; results.innerHTML = ''; results.hidden = true; form.hidden = false; planner.innerHTML = '';
+    selected.clear(); report = null; results.innerHTML = ''; results.hidden = true; $('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;planner.innerHTML = '';$('#planError').textContent='';
   }
-  function reset() { clear(); refresh(); }
-  window.Career = { complete, reset, clear };
+  function reset() { clear();$('#upskillTier').value=''; refresh(); }
+  $('#buildCareerPlan').addEventListener('click',()=>{
+ const job=JOBS.find(j=>j.id===$('#upskillJobId').value),tier=$('#upskillTier').value;
+ if(!job||!tierCourses[tier]){$('#planError').textContent='กรุณาเลือกงานที่สนใจและระดับ AI ก่อนสร้างแผน';(!job?$('#upskillJobId'):$('#upskillTier')).focus();return;}
+ $('#planError').textContent='';complete(job,{aiTier:tier});
+});
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-upskill]');if(!button)return;
+ clear();$('#upskillJobId').value=button.dataset.upskill;$('#upskillTier').value='';refresh();
+ location.hash='training';setTimeout(()=>$('#upskillHeading').focus(),0);
+});
   refresh();
 })();

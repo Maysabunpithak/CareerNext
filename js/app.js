@@ -34,7 +34,7 @@ function showSection(id){
 }
 function detail(j){
  const list=items=>'<ul>'+items.map(s=>`<li>${esc(s)}</li>`).join('')+'</ul>';
- $('#jobDetails').innerHTML=`<article class="detail-card"><div class="job-header"><div class="job-company-info"><div class="company-logo ${j.color}">${j.logo}</div><div><h1 tabindex="-1" id="detailHeading">${esc(j.title)}</h1><p class="job-company">${esc(j.company)}</p></div></div>${likeButton(j)}</div>${tags(j)}<p class="detail-summary">${esc(j.summary)}</p><div class="job-footer"><strong class="job-salary">${salary(j)}</strong><time datetime="${j.date}">ประกาศ ${dateLabel(j.date)}</time></div><div class="detail-grid"><section><h2>หน้าที่และความรับผิดชอบ</h2>${list(j.duties)}</section><section><h2>คุณสมบัติผู้สมัคร</h2>${list(j.qualifications)}</section><section><h2>ทักษะที่ต้องการ</h2>${list(j.skills)}</section><section><h2>สวัสดิการและสิ่งที่จะได้รับ</h2>${list(j.benefits)}</section></div><div class="detail-contact"><h2>ช่องทางติดต่อ</h2><p>ฝ่ายบุคคล — ${esc(j.company)}</p><p>${esc(j.contact)} <span class="sample-label">(อีเมลตัวอย่าง)</span></p></div><button class="submit-btn" data-apply="${j.id}">สมัครตำแหน่ง ${esc(j.title)}</button></article>`;
+ $('#jobDetails').innerHTML=`<article class="detail-card"><div class="job-header"><div class="job-company-info"><div class="company-logo ${j.color}">${j.logo}</div><div><h1 tabindex="-1" id="detailHeading">${esc(j.title)}</h1><p class="job-company">${esc(j.company)}</p></div></div>${likeButton(j)}</div>${tags(j)}<p class="detail-summary">${esc(j.summary)}</p><div class="job-footer"><strong class="job-salary">${salary(j)}</strong><time datetime="${j.date}">ประกาศ ${dateLabel(j.date)}</time></div><div class="detail-grid"><section><h2>หน้าที่และความรับผิดชอบ</h2>${list(j.duties)}</section><section><h2>คุณสมบัติผู้สมัคร</h2>${list(j.qualifications)}</section><section><h2>ทักษะที่ต้องการ</h2>${list(j.skills)}</section><section><h2>สวัสดิการและสิ่งที่จะได้รับ</h2>${list(j.benefits)}</section></div><div class="detail-contact"><h2>ช่องทางติดต่อ</h2><p>ฝ่ายบุคคล — ${esc(j.company)}</p><p>${esc(j.contact)} <span class="sample-label">(อีเมลตัวอย่าง)</span></p></div><button class="submit-btn" data-apply="${j.id}">สมัครตำแหน่ง ${esc(j.title)}</button><button type="button" class="upskill-link" data-upskill="${j.id}">พัฒนาทักษะสำหรับงานนี้ →</button></article>`;
  showSection('details'); document.title=j.title+' | OpenCareers'; $('#detailHeading').focus();
 }
 function route(){
@@ -66,11 +66,11 @@ function setError(id,message){const el=$('#'+id);$('#'+el.getAttribute('aria-des
 function openModal(id){
  const j=JOBS.find(j=>j.id===id); currentJob=j||null; returnFocus=document.activeElement;
  form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';$('#applicationJobId').value=j?.id||'';
- window.Career?.reset();
+ resetResume();
  $('#applyTitle').textContent='ลงทะเบียนสมัครงานและระบุระดับทักษะ AI';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
  $$('.header,.main,.site-footer').forEach(el=>el.inert=true);$('#prefix').focus();
 }
-function closeModal(){window.Career?.clear();form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');$$('.header,.main,.site-footer').forEach(el=>el.inert=false);if(returnFocus?.isConnected)returnFocus.focus();}
+function closeModal(){resetResume();form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');$$('.header,.main,.site-footer').forEach(el=>el.inert=false);if(returnFocus?.isConnected)returnFocus.focus();}
 $('#modalCloseBtn').addEventListener('click',closeModal);
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 modal.addEventListener('keydown',e=>{
@@ -95,10 +95,10 @@ function validateApplication(data){
  return errors;
 }
 form.addEventListener('submit',e=>{
- e.preventDefault();success.style.display='none';const data=Object.fromEntries(new FormData(form));const errors=validateApplication(data);fields.forEach(id=>setError(id,errors[id]||''));
+ e.preventDefault();success.style.display='none';const data=Object.fromEntries(new FormData(form));const errors=validateApplication(data);const resumeError=validateResume($("#resume").files[0]);showResumeError(resumeError);if(resumeError){$("#resume").focus();return;}fields.forEach(id=>setError(id,errors[id]||''));
  if(Object.keys(errors).length){$('#'+Object.keys(errors)[0]).focus();return;}
  currentJob=JOBS.find(j=>j.id===data.jobId);
- success.textContent=`ลงทะเบียนความสนใจตำแหน่ง ${currentJob.title} เรียบร้อยแล้ว ระดับ AI: ${data.aiTier} (โหมดสาธิต ไม่มีการส่งหรือเก็บข้อมูลส่วนบุคคล)`;success.style.display='block';window.Career?.complete(currentJob,data);form.reset();currentJob=null;success.focus();
+ success.textContent=`ลงทะเบียนความสนใจตำแหน่ง ${currentJob.title} เรียบร้อยแล้ว ระดับ AI: ${data.aiTier} (โหมดสาธิต ไม่มีการส่งหรือเก็บข้อมูลส่วนบุคคล)`;success.style.display='block';resetResume();form.reset();currentJob=null;success.focus();
 });
 $$('.training-card').forEach(el=>el.classList.add('show'));
 renderJobs();route();
@@ -134,3 +134,19 @@ renderJobs();route();
  $('#searchForm').addEventListener('submit',close);
  $('#searchForm').addEventListener('reset',close);
 })();
+function validateResume(file){
+ if(!file)return '';
+ if(!/\.(pdf|doc|docx)$/i.test(file.name))return 'กรุณาเลือกไฟล์ PDF, DOC หรือ DOCX';
+ if(file.size===0)return 'ไฟล์นี้ว่างเปล่า กรุณาเลือกไฟล์ใหม่';
+ if(file.size>5*1024*1024)return 'ไฟล์ต้องมีขนาดไม่เกิน 5 MB';
+ return '';
+}
+function showResumeError(message){$('#errorResume').textContent=message;$('#resume').setAttribute('aria-invalid',String(Boolean(message)));}
+function resetResume(){$('#resume').value='';$('#resumeStatus').textContent='';$('#removeResume').hidden=true;showResumeError('');}
+$('#resume').addEventListener('change',()=>{
+ const file=$('#resume').files[0],error=validateResume(file);
+ showResumeError(error);
+ $('#resumeStatus').textContent=file&&!error?'ไฟล์ที่เลือก: '+file.name+' ('+(file.size/1024/1024).toFixed(2)+' MB) — ยังไม่ได้ส่งไฟล์':'';
+ $('#removeResume').hidden=!file;
+});
+$('#removeResume').addEventListener('click',()=>{resetResume();$('#resume').focus();});

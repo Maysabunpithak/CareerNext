@@ -15,7 +15,7 @@
       <div class="logo">OpenCareers</div>
       <ul class="nav-links">
         <li><a href="#" aria-current="page" class="nav-link active" data-section="jobs">หางาน</a></li>
-        <li><a href="#" class="nav-link" data-section="training">หลักสูตรอบรม</a></li>
+        <li><a href="#" class="nav-link" data-section="training">อบรม / Upskill</a></li>
 
         <li><a href="#" class="nav-link" data-section="about">เกี่ยวกับเรา</a></li>
       </ul>
@@ -38,7 +38,7 @@
             </div>
             <button class="search-btn" id="searchBtn" type="submit">ค้นหางาน</button>
           </form>
-          <button class="hero-register" id="registerTalent">วางแผนสมัครงานและพัฒนาทักษะ AI →</button>
+          <button class="hero-register" id="registerTalent">สมัครงาน AI และดิจิทัล →</button>
         </div>
       </div>
 
@@ -115,7 +115,19 @@
     <section id="training" class="section">
       <div class="container">
         <!-- หัวเรื่องจะเห็นแน่ ๆ -->
-        <h1 class="training-title-lg">หลักสูตรอบรม & Certification</h1>
+        <h1 class="training-title-lg">อบรม / Upskill</h1>
+<section class="upskill-workspace" aria-labelledby="upskillHeading">
+<h2 id="upskillHeading" tabindex="-1">วางแผนพัฒนาทักษะสำหรับงานที่สนใจ</h2>
+<p class="field-help">เลือกงานและระดับ AI เพื่อสำรวจทักษะและหลักสูตรที่เหมาะกับคุณ โดยไม่ต้องกรอกใบสมัครงาน</p>
+<div id="upskillControls" class="form-grid">
+<div class="form-group"><label for="upskillJobId">งานที่สนใจ</label><select id="upskillJobId"></select></div>
+<div class="form-group"><label for="upskillTier">ระดับ AI ของคุณ</label><select id="upskillTier"><option value="">เลือกระดับ AI</option><option value="Beginner">Beginner — เริ่มต้น</option><option value="Pioneer">Pioneer — ประยุกต์ใช้</option><option value="Innovator">Innovator — ออกแบบและสร้างระบบ</option></select></div>
+</div>
+<section id="careerPlanner" class="career-planner" aria-label="เปรียบเทียบทักษะและแนะนำหลักสูตร"></section>
+<button type="button" id="buildCareerPlan" class="apply-btn">สร้างแผนพัฒนาทักษะ</button>
+<p id="planError" class="error-msg" role="status"></p>
+</section>
+<h2>หลักสูตรอบรม & Certification</h2>
 
         <p class="training-intro">พัฒนาศักยภาพผ่านหลักสูตร อบรม สัมมนา และการเตรียมประเมินสมรรถนะ AI</p><div class="competency-grid"><span>01 · Human-Centered Mindset</span><span>02 · Ethics of AI</span><span>03 · Techniques & Applications</span><span>04 · AI System Design</span></div><p class="course-note">รายการและราคาเป็นตัวอย่างสำหรับโครงการศึกษา การเตรียมประเมินไม่ใช่การรับรองจากองค์กรภายนอก</p><div class="training-grid"><article class="training-card show" id="course-PROMPT" tabindex="-1"><div class="course-banner" style="--course-color:#1d4ed8"><span>อบรม · Beginner</span><strong>PROMPT</strong><span>AI LEARNING / 01</span></div><div class="training-content"><span class="course-category">Techniques & Applications</span><h2 class="training-title">Generative AI Foundations & Prompt Engineering</h2><p class="training-description">เข้าใจ LLM ฝึกออกแบบคำสั่งพร้อมบริบทและตัวอย่าง เพื่อสรุปเอกสาร วิเคราะห์ข้อมูล และประเมินคำตอบของ AI</p><p class="course-outcome"><strong>สิ่งที่จะได้รับ:</strong> สร้างชุด Prompt และเกณฑ์ตรวจสอบคำตอบสำหรับงานจริง</p><div class="training-price">฿4,500 · 18 ชั่วโมง</div></div></article>
 <article class="training-card show" id="course-CREATE" tabindex="-1"><div class="course-banner" style="--course-color:#6d28d9"><span>อบรม · Pioneer</span><strong>CREATE</strong><span>AI LEARNING / 02</span></div><div class="training-content"><span class="course-category">Techniques & Applications</span><h2 class="training-title">Multimodal Generative AI for Business & Creative Content</h2><p class="training-description">ประยุกต์ AI กับข้อความ ภาพ เสียง และวิดีโอ เพื่อวางแผนแคมเปญและผลิตสื่อดิจิทัลที่เหมาะกับผู้ชม</p><p class="course-outcome"><strong>สิ่งที่จะได้รับ:</strong> ออกแบบแคมเปญพร้อมสื่อหลายรูปแบบและแนวทางตรวจคุณภาพ</p><div class="training-price">฿3,900 · 15 ชั่วโมง</div></div></article>
@@ -196,8 +208,15 @@
 
           <div class="form-group"><label for="aiTier">ระดับสมรรถนะ AI ของคุณ</label><select id="aiTier" name="aiTier" required><option value="">เลือกระดับสมรรถนะ AI</option><option value="Beginner">Beginner — ระดับเริ่มต้น</option><option value="Pioneer">Pioneer — ระดับผู้บุกเบิก</option><option value="Innovator">Innovator — ระดับผู้สร้างสรรค์สิ่งใหม่</option></select><p class="field-help">Beginner: เริ่มใช้งาน AI · Pioneer: ประยุกต์ AI ในงาน · Innovator: ออกแบบและสร้างระบบ AI</p></div>
           <div class="form-group"><label for="applicationJobId">ตำแหน่งงานที่ต้องการสมัคร</label><select name="jobId" id="applicationJobId" required></select></div>
-          <section id="careerPlanner" class="career-planner" aria-label="เปรียบเทียบทักษะและแนะนำหลักสูตร"></section>
-          <div class="consent-box"><h3>การใช้ข้อมูลส่วนบุคคล</h3><p id="privacyNotice">ใช้ข้อมูลที่กรอกเพื่อสาธิตการลงทะเบียนความสนใจและจัดทำโปรไฟล์ทักษะ AI บนหน้าจอนี้เท่านั้น ไม่มีการส่งให้บริษัทหรือจัดเก็บในฐานข้อมูล คุณยกเลิกได้ด้วยการปิดฟอร์ม สรุปที่ดาวน์โหลดจะมีเฉพาะตำแหน่ง ระดับ AI ทักษะและแผนเรียน ไม่รวมชื่อหรือข้อมูลติดต่อ</p><div class="form-group"><label class="consent-label" for="consent"><input type="checkbox" id="consent" name="consent" value="yes" required> ข้าพเจ้ายินยอมให้ประมวลผลข้อมูลตามวัตถุประสงค์ที่แจ้งไว้ข้างต้น (PDPA Consent)</label></div></div>
+          <div class="form-group resume-field">
+  <label for="resume">แนบเรซูเม่ (ไม่บังคับ)</label>
+  <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" aria-describedby="resumeHelp errorResume">
+  <p id="resumeHelp" class="field-help">รองรับ PDF, DOC, DOCX ขนาดไม่เกิน 5 MB · โหมดสาธิต: ไฟล์ไม่ถูกส่งหรือจัดเก็บ</p>
+  <div id="resumeStatus" role="status" class="field-help"></div>
+  <button type="button" id="removeResume" class="course-more" hidden>นำไฟล์ออก</button>
+  <div id="errorResume" class="error-msg"></div>
+</div>
+          <div class="consent-box"><h3>การใช้ข้อมูลส่วนบุคคล</h3><p id="privacyNotice">ใช้ข้อมูลที่กรอกและไฟล์เรซูเม่เพื่อสาธิตการสมัครงานบนหน้าจอนี้เท่านั้น ไม่มีการส่งให้บริษัทหรือจัดเก็บในฐานข้อมูล ข้อมูลและไฟล์ที่เลือกจะถูกล้างเมื่อปิดฟอร์มหรือยืนยันการลงทะเบียน</p><div class="form-group"><label class="consent-label" for="consent"><input type="checkbox" id="consent" name="consent" value="yes" required> ข้าพเจ้ายินยอมให้ประมวลผลข้อมูลตามวัตถุประสงค์ที่แจ้งไว้ข้างต้น (PDPA Consent)</label></div></div>
           <button type="submit" class="submit-btn">ยืนยันการลงทะเบียน</button>
           <div role="status" tabindex="-1" id="successMessage" class="success-message" style="display:none;">ตรวจสอบใบสมัครเรียบร้อยแล้ว (การสาธิต ไม่มีการส่งข้อมูลจริง)</div>
         </form>
