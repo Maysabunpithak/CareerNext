@@ -1318,3 +1318,10 @@ body { background:#faf8ff; color:#514c60; }
 .hero-orbit-two::before { background:#b090cb; }
 .hero .motion-toggle { background:#f5effc; color:#654978; border-color:#cbb4df; }
 .hero .motion-toggle:hover { background:#fff; color:#432555; border-color:#9670b8; }
+/* Balanced Thai/English hierarchy in the course introduction. */
+#training .training-title-lg { font-size:clamp(1.6rem,2.6vw,2rem); font-weight:700; line-height:1.5; margin:0 auto 18px; letter-spacing:0; text-wrap:balance; }
+#training .training-title-en { display:inline-block; font-size:.88em; font-weight:600; vertical-align:baseline; }
+#training > .container > .training-intro { max-width:760px; margin:0 auto 10px; font-size:1rem; line-height:1.85; color:#62546f; text-wrap:balance; }
+#training > .container > .training-intro a { font-weight:500; text-underline-offset:4px; }
+#training > .container > .course-note { max-width:760px; margin:18px auto 24px; font-size:.85rem; line-height:1.8; color:#786b82; text-wrap:balance; }
+@media(max-width:640px){ #training > .container > .training-intro {font-size:.95rem;} #training > .container > .course-note {font-size:.8rem;} }
