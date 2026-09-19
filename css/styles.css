@@ -1049,3 +1049,48 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .hero .hero-description { max-width:800px; margin:0 auto 30px; font-size:clamp(1rem,1.35vw,1.1rem); line-height:1.85; font-weight:400; text-wrap:balance; }
 .hero-description > span { display:block; }
 @media(max-width:640px){ .hero .hero-heading { margin-bottom:16px; } .hero .hero-description { margin-bottom:24px; line-height:1.8; } }
+/* CareerNext visual identity */
+:root { --brand:#6d28d9; --brand-hover:#5b21b6; --navy:#11162d; --cyan:#67e8f9; --brand-soft:#f3efff; --border:#e7e5f0; --ink:#20263d; }
+body { background:#f7f8fc; color:#424b63; }
+.header { background:var(--navy); border-bottom:1px solid #ffffff12; box-shadow:0 4px 20px #0a10201a; }
+.logo { color:#fff; text-decoration:none; font-size:1.5rem; letter-spacing:-.04em; gap:11px; }
+.logo::before { display:none; }
+.logo img { flex-shrink:0; width:42px; height:42px; }
+.brand-next { color:var(--cyan); }
+.nav-links a { color:#c5c9dc; padding:8px 0; }
+.nav-links a.active { color:var(--cyan); box-shadow:0 2px 0 var(--cyan); }
+.nav-links a:hover { color:#fff; }
+.hero { background:radial-gradient(ellipse at 85% 10%,#6d28d925,transparent 55%),radial-gradient(ellipse at 8% 90%,#0891b218,transparent 50%),var(--navy); border-bottom:1px solid #e7e5f0; }
+.hero::after { background:none; width:300px; height:300px; border:1px solid #67e8f922; border-radius:50%; right:4%; top:8%; opacity:.65; }
+.hero h1 { background:none; color:#f8f9ff; -webkit-text-fill-color:currentColor; }
+.hero-heading-end { color:var(--cyan); }
+.hero .hero-description { color:#c9cee2; }
+.search-box { border:1px solid #e8e4f3; box-shadow:0 16px 40px #0000001a; border-radius:18px; }
+.search-btn,.submit-btn { background:var(--brand); color:white; box-shadow:0 4px 12px #6d28d91f; }
+.search-btn:hover,.submit-btn:hover { background:var(--brand-hover); }
+.apply-btn { color:#fff; background:var(--brand); border-color:var(--brand); }
+.apply-btn:hover { color:#fff; background:var(--brand-hover); border-color:var(--brand-hover); }
+:focus-visible { outline-color:var(--brand); }
+input:focus,textarea:focus,select:focus { border-color:var(--brand); box-shadow:0 0 0 3px #6d28d91a; }
+input[type="checkbox"],input[type="range"] { accent-color:var(--brand); }
+.job-card,.training-card,.person-card,.detail-card,.filters-panel,.address-card,.upskill-workspace { border:1px solid var(--border); box-shadow:0 4px 18px #20263d05; }
+.job-card:hover,.training-card:hover { border-color:#c4b5fd; box-shadow:0 10px 28px #42206b0d; }
+.job-title-link:hover,.details-link,.upskill-link,.back-btn,.course-more,.person-body a,.training-intro a { color:var(--brand); }
+.location-options { border-color:var(--border); box-shadow:0 12px 28px #11162d26; }
+.location-options [role="option"]:hover,.location-options [aria-selected="true"] { color:var(--brand-hover); background:var(--brand-soft); }
+.tag.level,.plan-tier { background:#eee8ff; color:#5b21b6; }
+.tag.type { background:#e6f8fb; color:#155e75; }
+.tag.remote { background:#f0f2f8; color:#475569; }
+.job-salary,.skill-count { color:var(--brand); }
+.training-price { background:var(--navy); }
+.course-banner { background:linear-gradient(130deg,#4c1d95,#6d28d9); }
+.training-card:nth-child(2n) .course-banner { background:linear-gradient(130deg,#164e63,#0e7490); }
+.training-card:nth-child(3n) .course-banner { background:linear-gradient(130deg,#1e1b4b,#4338ca); }
+.competency-grid span { background:#f3efff; color:#5b21b6; border-color:#e3dafa; }
+.career-planner,.consent-box { background:#f8f6ff; border-color:#e4dcf8; }
+.career-planner h3,#careerResults h3 { color:#34205e; }
+.recommended-courses > li { border-left-color:var(--brand); }
+.site-footer { background:var(--navy); color:#c5c9dc; border-top:1px solid #ffffff12; }
+.site-footer strong { color:var(--cyan); }
+@media(max-width:640px){ .logo { font-size:1.3rem; } .logo img { width:36px;height:36px; } }
+@media print { body.printing-career { background:white;color:#111; } }
