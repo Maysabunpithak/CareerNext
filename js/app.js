@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 const $ = (s, root=document) => root.querySelector(s);
 const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
 const typeNames={fulltime:'Full time',parttime:'Part time',internship:'Internship',project:'Project',volunteer:'Volunteer'};
@@ -11,6 +11,7 @@ let saved=new Set();
 try { const ids=JSON.parse(localStorage.getItem('opencareers.saved')||'[]'); if(Array.isArray(ids)) saved=new Set(ids.filter(id=>JOBS.some(j=>j.id===id))); } catch {}
 let currentJob=null, returnFocus=null;
 const state={keyword:'',location:''};
+$('#locationOptions').innerHTML=[...new Set(JOBS.map(j=>j.location))].map(location=>`<option value="${esc(location)}"></option>`).join('');
 function saveJobs(){try{localStorage.setItem('opencareers.saved',JSON.stringify([...saved]));}catch{}}
 function likeButton(j){return `<button class="heart-btn ${saved.has(j.id)?'liked':''}" data-like="${j.id}" aria-label="บันทึกงาน ${esc(j.title)}" aria-pressed="${saved.has(j.id)}">${saved.has(j.id)?'♥':'♡'}</button>`;}
 function tags(j){return `<div class="job-tags"><span class="tag level">${levelNames[j.level]}</span><span class="tag type">${typeNames[j.type]}</span><span class="tag remote">${esc(j.location)}</span></div>`;}

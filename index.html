@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 
 <head>
@@ -31,7 +31,8 @@
           <p>ค้นหางาน AI และดิจิทัล พร้อม Upskill / Reskill เพื่อโอกาสใหม่ของคุณ</p>
           <form class="search-box" id="searchForm" role="search">
             <input type="text" class="search-input" aria-label="ตำแหน่งงานหรือคำค้น" placeholder="ตำแหน่งงานหรือคำค้น" id="searchInput" />
-            <input type="text" class="search-input" aria-label="ประเทศหรือเมือง" placeholder="ประเทศหรือเมือง" id="locationInput" />
+            <input type="text" class="search-input" aria-label="จังหวัดหรือเมือง" placeholder="พิมพ์หรือเลือกจังหวัด / เมือง" id="locationInput" list="locationOptions" autocomplete="off" />
+              <datalist id="locationOptions"></datalist>
             <button class="search-btn" id="searchBtn" type="submit">ค้นหางาน</button>
           </form>
           <button class="hero-register" id="registerTalent">วางแผนสมัครงานและพัฒนาทักษะ AI →</button>
