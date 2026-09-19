@@ -1342,3 +1342,9 @@ body { background:#faf8ff; color:#514c60; }
 #training .training-help a { color:var(--brand); font-weight:600; text-underline-offset:4px; }
 #training > .container > .course-catalog-note { margin:24px auto 0; font-size:.8rem; }
 @media(max-width:640px){ #training .training-help {font-size:.88rem;} }
+/* Keep the desktop composition on phones; native pinch zoom stays available. */
+@media screen {
+ html,body { min-width:1280px; }
+ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+ .header { min-width:1280px; }
+}
