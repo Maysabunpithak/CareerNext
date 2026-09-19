@@ -85,7 +85,7 @@ const LearningPlan = (() => {
  }
  function filterCourses(){
   const only=$('#interestedCoursesOnly').checked;let count=0;
-  $('#training .training-card').forEach(card=>{const show=!only||interested.has(card.id.replace('course-',''));card.hidden=!show;if(show)count++;});
+  $$('#training .training-card').forEach(card=>{const show=!only||interested.has(card.id.replace('course-',''));card.hidden=!show;if(show)count++;});
   $('#noInterestedCourses').hidden=count>0;
  }
  const grid=$('#training .training-grid');
@@ -97,7 +97,7 @@ const LearningPlan = (() => {
   const code=button.dataset.interest;
   interested.has(code)?interested.delete(code):interested.add(code);
   try{localStorage.setItem('careernext.courses',JSON.stringify([...interested]));}catch{}
-  $('[data-interest]').filter(el=>el.dataset.interest===code).forEach(el=>{const active=interested.has(code);el.setAttribute('aria-pressed',String(active));el.innerHTML='<span aria-hidden="true">'+(active?'♥':'♡')+'</span> '+(active?'สนใจแล้ว':'สนใจหลักสูตร');});
+  $$('[data-interest]').filter(el=>el.dataset.interest===code).forEach(el=>{const active=interested.has(code);el.setAttribute('aria-pressed',String(active));el.innerHTML='<span aria-hidden="true">'+(active?'♥':'♡')+'</span> '+(active?'สนใจแล้ว':'สนใจหลักสูตร');});
   filterCourses();
  });
  let report=null;
@@ -139,13 +139,6 @@ const LearningPlan = (() => {
  });
 
  $('#upskillJobId').addEventListener('change',()=>{Object.keys(levels).forEach(k=>delete levels[k]);refresh();});
- function plainText(data){
-  return ['CareerNext — แผนพัฒนาทักษะ',data.job.title,
-   'ความรู้ที่ระบุ:',...data.job.skills.map(s=>s+': '+LearningPlan.labels[data.levels[s]||0]),
-   'ลำดับการเรียน:',...data.steps.map((s,i)=>`${i+1}. ${s.title}\nพัฒนาด้าน: ${s.skills.join(', ')}\n${s.reason}\n${s.practice}\n${s.note}${s.optional?' (ทางเลือกเพิ่มเติม)':''}`),
-   data.steps.length?'':'เชี่ยวชาญครบทุกด้านตามที่ระบุ: เตรียม Portfolio และขอข้อเสนอแนะ',
-   'เป็นแนวทางจากการประเมินตนเอง ไม่ใช่ผลรับรองทักษะหรือการสมัครงานจริง'].join('\n');
- }
  function clear(){
   Object.keys(levels).forEach(k=>delete levels[k]);report=null;results.innerHTML='';results.hidden=true;
   $('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;$('#planError').textContent='';
@@ -158,14 +151,9 @@ const LearningPlan = (() => {
   }
   $('#planError').textContent='';
   report={job:j,levels:{...levels},steps:stepsFor(j)};
-  results.innerHTML=`<div class="summary-heading"><h3>แผนพัฒนาทักษะของคุณ</h3><h4>${esc(j.title)}</h4></div><ul>${j.skills.map(s=>`<li>${esc(s)} — ${LearningPlan.labels[levels[s]||0]}</li>`).join('')}</ul>${overview(j)}${stepsHTML(report.steps)}<p class="field-help">ดาวน์โหลดแผนเก็บไว้ได้ แผนจะหายเมื่อรีเฟรชหน้า</p><div class="summary-actions"><button type="button" class="apply-btn" id="printCareerSummary">พิมพ์ / บันทึก PDF</button><button type="button" class="apply-btn" id="downloadCareerSummary">ดาวน์โหลดสรุป (.txt)</button><button type="button" class="apply-btn" id="editCareerPlan">ปรับระดับความรู้</button><button type="button" class="apply-btn" id="newCareerPlan">เริ่มแผนใหม่</button></div>`;
+  results.innerHTML=`<div class="summary-heading"><h3>แผนพัฒนาทักษะของคุณ</h3><h4>${esc(j.title)}</h4></div><ul>${j.skills.map(s=>`<li>${esc(s)} — ${LearningPlan.labels[levels[s]||0]}</li>`).join('')}</ul>${overview(j)}${stepsHTML(report.steps)}<p class="field-help">เก็บแผนไว้โดยกดบันทึก PDF แล้วเลือก “บันทึกเป็น PDF” ในหน้าต่างที่เปิดขึ้น</p><div class="summary-actions"><button type="button" class="apply-btn" id="printCareerSummary">บันทึก PDF</button><button type="button" class="apply-btn" id="newCareerPlan" title="ล้างข้อมูลที่เลือกไว้และเริ่มแผนใหม่">ล้างตัวเลือก</button></div>`;
   planner.innerHTML='';$('#upskillControls').hidden=true;$('#buildCareerPlan').hidden=true;results.hidden=false;
   $('#printCareerSummary').addEventListener('click',()=>{document.body.classList.add('printing-career');try{window.print();}finally{document.body.classList.remove('printing-career');}});
-  $('#downloadCareerSummary').addEventListener('click',()=>{
-   const url=URL.createObjectURL(new Blob(['\uFEFF'+plainText(report)],{type:'text/plain;charset=utf-8'}));
-   const a=document.createElement('a');a.href=url;a.download='CareerNext-plan-'+j.id+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  });
-  $('#editCareerPlan').addEventListener('click',()=>{results.hidden=true;results.innerHTML='';report=null;$('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;refresh();$('#upskillJobId').focus();});
   $('#newCareerPlan').addEventListener('click',reset);
   results.setAttribute('tabindex','-1');results.focus();
  });
