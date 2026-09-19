@@ -51,7 +51,7 @@ function route(){
  const hash=location.hash.slice(1);
  if(hash.startsWith('course/')){
   const code=hash.slice(7),course=COURSES.find(c=>c.code===code);
-  if(course){showSection('training');document.title=course.title+' | CareerNext';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
+  if(course){const filter=$('#interestedCoursesOnly');if(filter){filter.checked=false;filter.dispatchEvent(new Event('change'));}showSection('training');document.title=course.title+' | CareerNext';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
  }
  if(hash.startsWith('job/')){const j=JOBS.find(j=>j.id===hash.slice(4));if(j){detail(j);return;}}
  const id=['jobs','training','upskill','about'].includes(hash)?hash:'jobs'; showSection(id);

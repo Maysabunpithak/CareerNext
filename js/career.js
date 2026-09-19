@@ -137,7 +137,7 @@ const LearningPlan = (() => {
   Object.keys(levels).forEach(k=>delete levels[k]);report=null;results.innerHTML='';results.hidden=true;
   $('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;$('#planError').textContent='';
  }
- function reset(){clear();$('#upskillJobId').value='';refresh();$('#upskillJobId').focus();}
+ function reset(){clear();$('#upskillJobId').value='';$('#interestedCoursesOnly').checked=false;filterCourses();refresh();$('#upskillJobId').focus();}
  $('#buildCareerPlan').addEventListener('click',()=>{
   const j=job();
   if(!j){
