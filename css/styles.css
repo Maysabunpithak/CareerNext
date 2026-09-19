@@ -1107,3 +1107,5 @@ html { scrollbar-gutter:stable; }
 @keyframes menu-enter { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
 @media(prefers-reduced-motion:reduce){ *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
 @media print { .modal { display:none; } }
+.logo img { width:36px; height:36px; }
+@media(max-width:640px){ .logo img { width:32px; height:32px; } }
