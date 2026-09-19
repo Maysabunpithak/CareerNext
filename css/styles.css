@@ -1094,3 +1094,16 @@ input[type="checkbox"],input[type="range"] { accent-color:var(--brand); }
 .site-footer strong { color:var(--cyan); }
 @media(max-width:640px){ .logo { font-size:1.3rem; } .logo img { width:36px;height:36px; } }
 @media print { body.printing-career { background:white;color:#111; } }
+/* Short, consistent interaction transitions and stable page width. */
+html { scrollbar-gutter:stable; }
+.search-btn,.submit-btn,.apply-btn,.heart-btn,.back-btn,.course-more,.location-toggle,.nav-links a { transition:background-color 160ms ease,color 160ms ease,border-color 160ms ease,box-shadow 160ms ease; }
+.job-card,.job-card.show,.training-card,.training-card.show,.person-card { transition:border-color 180ms ease,box-shadow 180ms ease,transform 180ms ease; }
+.location-options:not([hidden]) { animation:menu-enter 140ms ease-out; }
+.modal { display:flex; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 180ms ease,visibility 0s linear 180ms; }
+.modal.active { opacity:1; visibility:visible; pointer-events:auto; transition:opacity 180ms ease,visibility 0s; }
+.modal .modal-content { animation:none; transform:translateY(8px); transition:transform 180ms ease; }
+.modal.active .modal-content { transform:translateY(0); }
+.modal-body { scrollbar-gutter:stable; }
+@keyframes menu-enter { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce){ *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+@media print { .modal { display:none; } }

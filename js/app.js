@@ -27,22 +27,31 @@ function resetSearch(){
  $$('.filters-panel input[type="checkbox"]').forEach(el=>el.checked=false); $('#savedOnly').checked=false;
  $('#salaryRange').value='0'; $('#searchForm').reset(); state.keyword='';state.location='';renderJobs();
 }
+const sectionScroll=new Map();
 function showSection(id){
+ const previous=$('.section.active');
+ if(previous)sectionScroll.set(previous.id,window.scrollY);
+ const next=$('#'+id);
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  $$('.section').forEach(s=>s.classList.toggle('active',s.id===id));
  $$('.nav-link').forEach(a=>{const active=a.dataset.section===(id==='details'?'jobs':id);a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
- window.scrollTo({top:0,behavior:'auto'});
+  window.scrollTo({top:id==='jobs'?(sectionScroll.get('jobs')||0):0,behavior:'instant'});
+ if(next&&previous?.id!==id&&!reduced&&next.animate){
+  next.getAnimations().forEach(animation=>animation.cancel());
+  next.animate([{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});
+ }
 }
 function detail(j){
  const list=items=>'<ul>'+items.map(s=>`<li>${esc(s)}</li>`).join('')+'</ul>';
  $('#jobDetails').innerHTML=`<article class="detail-card"><div class="job-header"><div class="job-company-info"><div class="company-logo ${j.color}">${j.logo}</div><div><h1 tabindex="-1" id="detailHeading">${esc(j.title)}</h1><p class="job-company">${esc(j.company)}</p></div></div>${likeButton(j)}</div>${tags(j)}<p class="detail-summary">${esc(j.summary)}</p><div class="job-footer"><strong class="job-salary">${salary(j)}</strong><time datetime="${j.date}">ประกาศ ${dateLabel(j.date)}</time></div><div class="detail-grid"><section><h2>หน้าที่และความรับผิดชอบ</h2>${list(j.duties)}</section><section><h2>คุณสมบัติผู้สมัคร</h2>${list(j.qualifications)}</section><section><h2>ทักษะที่ต้องการ</h2>${list(j.skills)}</section><section><h2>สวัสดิการและสิ่งที่จะได้รับ</h2>${list(j.benefits)}</section></div><div class="detail-contact"><h2>ช่องทางติดต่อ</h2><p>ฝ่ายบุคคล — ${esc(j.company)}</p><p>${esc(j.contact)} <span class="sample-label">(อีเมลตัวอย่าง)</span></p></div><button class="submit-btn" data-apply="${j.id}">สมัครตำแหน่ง ${esc(j.title)}</button><button type="button" class="upskill-link" data-upskill="${j.id}">พัฒนาทักษะสำหรับงานนี้ →</button></article>`;
- showSection('details'); document.title=j.title+' | CareerNext'; $('#detailHeading').focus();
+ showSection('details'); document.title=j.title+' | CareerNext'; $('#detailHeading').focus({preventScroll:true});
 }
 function route(){
  if($('#applyModal').classList.contains('active'))closeModal();
  const hash=location.hash.slice(1);
  if(hash.startsWith('course/')){
   const code=hash.slice(7),course=COURSES.find(c=>c.code===code);
-  if(course){showSection('training');document.title=course.title+' | CareerNext';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start'});return;}
+  if(course){showSection('training');document.title=course.title+' | CareerNext';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
  }
  if(hash.startsWith('job/')){const j=JOBS.find(j=>j.id===hash.slice(4));if(j){detail(j);return;}}
  const id=['jobs','training','upskill','about'].includes(hash)?hash:'jobs'; showSection(id);
@@ -72,9 +81,9 @@ function openModal(id){
  form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';$('#applicationJobId').value=j?.id||'';
  resetResume();
  $('#applyTitle').textContent='ลงทะเบียนสมัครงานและระบุระดับทักษะ AI';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
- $$('.header,.main,.site-footer').forEach(el=>el.inert=true);$('#prefix').focus();
+ $$('.header,.main,.site-footer').forEach(el=>el.inert=true);$('.modal-body').scrollTop=0;$('#prefix').focus({preventScroll:true});
 }
-function closeModal(){resetResume();form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');$$('.header,.main,.site-footer').forEach(el=>el.inert=false);if(returnFocus?.isConnected)returnFocus.focus();}
+function closeModal(){resetResume();form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');$$('.header,.main,.site-footer').forEach(el=>el.inert=false);if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});}
 $('#modalCloseBtn').addEventListener('click',closeModal);
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 modal.addEventListener('keydown',e=>{
