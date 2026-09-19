@@ -1192,3 +1192,39 @@ h1,h2,h3,h4 { line-height:1.45; }
 @keyframes hero-orbit-turn { to { transform:rotate(360deg); } }
 @media(max-width:640px){ .hero-orbit { opacity:.55; } .motion-toggle { right:16px; bottom:8px; font-size:.65rem; } }
 @media(prefers-reduced-motion:reduce){ .hero-motion * { animation:none!important; } .motion-toggle { display:none; } }
+/* Gen Z palette: lavender, lime and charcoal. */
+:root { --brand:#6843b5; --brand-hover:#51318f; --navy:#1b1c22; --cyan:#d4f76b; --brand-soft:#f0eaff; --border:#e6e0ef; --ink:#24222d; --lime:#d4f76b; --lavender:#c4b5fd; }
+body { background:#faf8ff; color:#514c60; }
+.header { background:#1b1c22; }
+.hero { background:radial-gradient(ellipse at 85% 10%,#b69bf52b,transparent 55%),radial-gradient(ellipse at 8% 90%,#d4f76b0c,transparent 50%),#1b1c22; }
+.hero .hero-description { color:#d0cbdc; }
+.hero h1 { color:#faf7ff; }
+.hero-heading-end,.brand-next { color:var(--lime); }
+.nav-links a { color:#d0cbdc; }
+.nav-links a.active { color:var(--lime); box-shadow:0 2px 0 var(--lime); }
+.search-btn,.submit-btn,.apply-btn { background:var(--lime); color:#242718; border-color:var(--lime); box-shadow:0 4px 12px #1111110d; }
+.search-btn:hover,.submit-btn:hover,.apply-btn:hover { background:#c3e957; color:#1b2110; border-color:#c3e957; }
+.search-box { border-color:#e6dff1; }
+.tag.level,.plan-tier { background:#eee5ff; color:#563591; }
+.tag.type { background:#eff7d8; color:#425518; }
+.tag.remote { background:#f1eff5; color:#5b5568; }
+.course-banner { background:linear-gradient(125deg,#d8cafa,#bfa8ef); color:#302044; }
+.training-card:nth-child(2n) .course-banner { background:linear-gradient(125deg,#e0f4af,#c8e97e); color:#2e3b15; }
+.training-card:nth-child(3n) .course-banner { background:linear-gradient(125deg,#333039,#222127); color:#f1eaff; }
+.training-price { background:#f0eaff; color:#503186; border:1px solid #e4d8f7; }
+.competency-grid span { background:#f1eaff; color:#58378e; border-color:#e4d8f7; }
+.career-planner,.consent-box { background:#f8f4ff; border-color:#e6dbf7; }
+.recommended-courses > li:first-child { background:#f5f9eb; border-color:#cfdfa7; border-left-color:#6f852b; }
+.job-card:hover,.training-card:hover { border-color:#c4b5df; box-shadow:0 10px 28px #39254e0c; }
+.location-options [role="option"]:hover,.location-options [aria-selected="true"] { background:#f0eaff; color:#51318f; }
+.hero-glow-one { background:radial-gradient(ellipse,#b495ef40,transparent 68%); }
+.hero-glow-two { background:radial-gradient(ellipse,#d4f76b1f,transparent 68%); }
+.hero-orbit { border-color:#d4f76b20; }
+.hero-orbit::before { background:#d4f76b; box-shadow:0 0 14px #d4f76b70; }
+.hero-orbit-two { border-color:#c4b5fd25; }
+.hero-orbit-two::before { background:#c4b5fd; }
+.motion-toggle { background:#1b1c22; color:#c8c1d3; }
+.motion-toggle:hover { border-color:var(--lime); }
+.site-footer { background:#1b1c22; color:#cec8d7; }
+.site-footer strong { color:var(--lime); }
+@media print { body.printing-career { background:white;color:#111; } }
