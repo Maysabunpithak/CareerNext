@@ -1288,3 +1288,10 @@ body { background:#faf8ff; color:#514c60; }
 .company-logo.company-mobile { background:#c4b5df; color:#2c2338; border-radius:12px 20px 12px 20px; }
 .company-logo.company-mentor { background:#f0eddf; color:#63533c; border-color:#ded8c7; }
 @media(max-width:640px){ .company-logo {width:48px;height:48px;font-size:1rem;} }
+/* Align every line in the company address card. */
+.address-card { text-align:left; padding:24px; }
+.address-card h3 { margin:0 0 10px; }
+.address-card > p { margin:0 0 12px; line-height:1.8; }
+.address-card .course-note { text-align:left; margin:0 0 14px; color:#71677f; }
+.address-card > a { display:inline-block; margin:0; color:var(--brand); font-size:.9rem; text-underline-offset:3px; }
+@media(max-width:640px){ .address-card {padding:20px;} }
