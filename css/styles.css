@@ -1275,3 +1275,16 @@ body { background:#faf8ff; color:#514c60; }
 .filters-panel .slider:focus-visible { outline:3px solid #b49cdb; outline-offset:6px; }
 .filters-panel .slider:active::-webkit-slider-thumb { cursor:grabbing; }
 .filters-panel .slider:active::-moz-range-thumb { cursor:grabbing; }
+/* Coordinated company monograms for the fictional employers. */
+.company-logo { width:54px; height:54px; border-radius:14px; border:1px solid #ded5eb; font-family:Arial,sans-serif; font-size:1.05rem; font-weight:800; letter-spacing:-.06em; box-shadow:inset 0 0 0 4px #ffffff28; position:relative; }
+.company-logo.tech-innovate { background:#e9ddfa; color:#573b7b; }
+.company-logo.cloud-tech { background:#e4f3b6; color:#3b4922; border-color:#d3e3a5; }
+.company-logo.data-analytics { background:#29262f; color:#e4d7fa; border-color:#39323f; }
+.company-logo.company-frontend { background:#d7c4f4; color:#352346; }
+.company-logo.company-devops { background:#e5f2bd; color:#394725; border-radius:50%; }
+.company-logo.company-data { background:#27252d; color:#d4f76b; }
+.company-logo.company-ai-intern { background:#f1eafa; color:#69448a; border:2px solid #c7b2df; border-radius:50%; }
+.company-logo.company-digital { background:#d4f76b; color:#2d3620; }
+.company-logo.company-mobile { background:#c4b5df; color:#2c2338; border-radius:12px 20px 12px 20px; }
+.company-logo.company-mentor { background:#f0eddf; color:#63533c; border-color:#ded8c7; }
+@media(max-width:640px){ .company-logo {width:48px;height:48px;font-size:1rem;} }
