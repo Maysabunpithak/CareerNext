@@ -1329,3 +1329,9 @@ body { background:#faf8ff; color:#514c60; }
 .hero .hero-heading { color:#24132f; -webkit-text-fill-color:currentColor; }
 .hero .hero-heading-end { color:#4d206d; }
 .hero .hero-description { color:#39313f; font-weight:500; }
+/* One gentle light pass on entry, then a calm static cover. */
+.hero-glow-one { animation:hero-drift 4s ease-out 1 both; }
+.hero-glow-two { animation:hero-drift 4s ease-out 1 reverse both; }
+.hero-light-sweep { position:absolute; inset:-40% -30%; background:linear-gradient(115deg,transparent 28%,#ffffff60 42%,#c4a2e32e 52%,transparent 66%); opacity:0; transform:translateX(-30%); animation:lavender-sweep 4s ease-in-out 1; }
+@keyframes lavender-sweep { 0% {opacity:0;transform:translateX(-30%) rotate(-5deg);} 30% {opacity:.65;} 70% {opacity:.45;} 100% {opacity:0;transform:translateX(30%) rotate(-5deg);} }
+@media(prefers-reduced-motion:reduce){ .hero-motion * {animation:none!important;} }
