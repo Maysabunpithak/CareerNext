@@ -1348,26 +1348,26 @@ body { background:#faf8ff; color:#514c60; }
  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
  .header { min-width:1280px; }
 }
-/* CareerNext assistant: original artwork with light, finite motion. */
+/* CareerNext assistant: original artwork with light, continuous motion. */
 .hero-assistant { position:absolute; inset:0; z-index:1; pointer-events:none; user-select:none; }
 .assistant-mascot { position:absolute; left:max(12px,calc(50% - 625px)); top:122px; width:240px; text-align:center; }
-.assistant-robot { display:block; width:240px; height:240px; object-fit:contain; transform:rotate(-4deg); animation:assistant-float 2.4s ease-in-out 2; }
+.assistant-robot { display:block; width:240px; height:240px; object-fit:contain; transform:rotate(-4deg); animation:assistant-float 2.4s ease-in-out infinite; }
 .assistant-caption { display:inline-block; margin-top:-3px; color:#756187; font:600 9px/1.5 'Segoe UI',sans-serif; letter-spacing:.2em; }
 .assistant-cards { position:absolute; right:max(26px,calc(50% - 614px)); top:163px; width:185px; text-align:left; }
 .assistant-card { padding:14px; background:#fcfaffed; color:#352244; border:1px solid #d6c6e8; border-radius:16px; box-shadow:0 12px 28px #51316d0c; }
-.assistant-job-card { transform:rotate(5deg); animation:assistant-card-float 2.4s ease-in-out 2; }
+.assistant-job-card { transform:rotate(5deg); animation:assistant-card-float 2.4s ease-in-out infinite; }
 .assistant-card-label { display:flex; align-items:center; gap:6px; color:#6e5c7d; font-size:10px; line-height:1.5; font-weight:500; }
 .assistant-status-dot { width:6px; height:6px; border-radius:50%; background:#8ba743; flex:none; }
 .assistant-card strong { display:block; margin-top:5px; font-size:12px; line-height:1.6; font-weight:700; white-space:nowrap; }
 .assistant-card-tags { display:flex; gap:5px; margin-top:10px; }
 .assistant-card-tags > span { background:#efe8f9; border-radius:5px; color:#674685; padding:2px 7px; font-size:9px; line-height:1.6; }
-.assistant-skill-card { width:174px; margin:17px 0 0 2px; background:#f4f9e7; border-color:#d7e5b9; transform:rotate(-4deg); animation:assistant-skill-float 2.4s ease-in-out .1s 2; }
+.assistant-skill-card { width:174px; margin:17px 0 0 2px; background:#f4f9e7; border-color:#d7e5b9; transform:rotate(-4deg); animation:assistant-skill-float 2.4s ease-in-out .1s infinite; }
 .assistant-skill-card .assistant-card-label { font:600 8px/1.5 'Segoe UI',sans-serif; letter-spacing:.09em; color:#6a764b; }
 .assistant-card-arrow { float:right; font-size:18px; line-height:1; color:#60752d; }
 .assistant-skill-track { display:flex; gap:4px; margin-top:10px; }
 .assistant-skill-track i { display:block; flex:1; height:5px; border-radius:3px; background:#e1e8d2; }
 .assistant-skill-track i:nth-child(-n+2) { background:#bad950; }
-.hero:focus-within .assistant-robot,.hero:focus-within .assistant-card { animation-play-state:paused; }
+
 @keyframes assistant-float { 0%,100% {transform:translateY(0) rotate(-4deg);} 50% {transform:translateY(-12px) rotate(1deg);} }
 @keyframes assistant-card-float { 0%,100% {transform:translateY(0) rotate(5deg);} 50% {transform:translateY(-8px) rotate(3deg);} }
 @keyframes assistant-skill-float { 0%,100% {transform:translateY(0) rotate(-4deg);} 50% {transform:translateY(-6px) rotate(-1deg);} }
