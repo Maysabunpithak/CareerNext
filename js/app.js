@@ -66,15 +66,16 @@ function setError(id,message){const el=$('#'+id);$('#'+el.getAttribute('aria-des
 function openModal(id){
  const j=JOBS.find(j=>j.id===id); currentJob=j||null; returnFocus=document.activeElement;
  form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';$('#applicationJobId').value=j?.id||'';
- $('#applyTitle').textContent='ลงทะเบียนและประเมินระดับทักษะ AI';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
+ window.Career?.reset();
+ $('#applyTitle').textContent='ลงทะเบียนสมัครงานและระบุระดับทักษะ AI';modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
  $$('.header,.main,.site-footer').forEach(el=>el.inert=true);$('#prefix').focus();
 }
-function closeModal(){form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');$$('.header,.main,.site-footer').forEach(el=>el.inert=false);if(returnFocus?.isConnected)returnFocus.focus();}
+function closeModal(){window.Career?.clear();form.reset();fields.forEach(id=>setError(id,''));success.style.display='none';modal.classList.remove('active');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');$$('.header,.main,.site-footer').forEach(el=>el.inert=false);if(returnFocus?.isConnected)returnFocus.focus();}
 $('#modalCloseBtn').addEventListener('click',closeModal);
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 modal.addEventListener('keydown',e=>{
  if(e.key==='Escape'){e.preventDefault();closeModal();}
- if(e.key==='Tab'){const elements=$$('button,input:not([type="hidden"]),select,textarea',modal).filter(el=>!el.disabled);const first=elements[0],last=elements[elements.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+ if(e.key==='Tab'){const elements=$$('button,input:not([type="hidden"]),select,textarea',modal).filter(el=>!el.disabled&&el.getClientRects().length);const first=elements[0],last=elements[elements.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
 });
 document.addEventListener('click',e=>{
  const apply=e.target.closest('[data-apply]');if(apply)openModal(apply.dataset.apply);
@@ -97,7 +98,7 @@ form.addEventListener('submit',e=>{
  e.preventDefault();success.style.display='none';const data=Object.fromEntries(new FormData(form));const errors=validateApplication(data);fields.forEach(id=>setError(id,errors[id]||''));
  if(Object.keys(errors).length){$('#'+Object.keys(errors)[0]).focus();return;}
  currentJob=JOBS.find(j=>j.id===data.jobId);
- success.textContent=`ลงทะเบียนความสนใจตำแหน่ง ${currentJob.title} เรียบร้อยแล้ว ระดับ AI: ${data.aiTier} (โหมดสาธิต ไม่มีการส่งหรือเก็บข้อมูลส่วนบุคคล)`;success.style.display='block';form.reset();currentJob=null;success.focus();
+ success.textContent=`ลงทะเบียนความสนใจตำแหน่ง ${currentJob.title} เรียบร้อยแล้ว ระดับ AI: ${data.aiTier} (โหมดสาธิต ไม่มีการส่งหรือเก็บข้อมูลส่วนบุคคล)`;success.style.display='block';window.Career?.complete(currentJob,data);form.reset();currentJob=null;success.focus();
 });
 $$('.training-card').forEach(el=>el.classList.add('show'));
 renderJobs();route();
