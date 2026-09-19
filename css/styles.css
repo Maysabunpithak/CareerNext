@@ -1352,7 +1352,6 @@ body { background:#faf8ff; color:#514c60; }
 .hero-assistant { position:absolute; inset:0; z-index:1; pointer-events:none; user-select:none; }
 .assistant-mascot { position:absolute; left:max(12px,calc(50% - 625px)); top:122px; width:240px; text-align:center; }
 .assistant-robot { display:block; width:240px; height:240px; object-fit:contain; scale:-1 1; transform:rotate(-4deg); animation:assistant-float 2.4s ease-in-out infinite; }
-.assistant-caption { display:inline-block; margin-top:-3px; color:#756187; font:600 9px/1.5 'Segoe UI',sans-serif; letter-spacing:.2em; }
 .assistant-cards { position:absolute; right:max(26px,calc(50% - 614px)); top:163px; width:185px; text-align:left; }
 .assistant-card { padding:14px; background:#fcfaffed; color:#352244; border:1px solid #d6c6e8; border-radius:16px; box-shadow:0 12px 28px #51316d0c; }
 .assistant-job-card { transform:rotate(5deg); animation:assistant-card-float 2.4s ease-in-out infinite; }
