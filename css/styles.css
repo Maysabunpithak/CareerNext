@@ -1026,3 +1026,9 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .training-card { scroll-margin-top:100px; }
 @media(max-width:640px){ #upskill {padding:32px 0;} .nav-links { flex-wrap:wrap; justify-content:center; gap:8px 16px; } }
 @media print { body.printing-career .course-catalog-link { display:none; } }
+
+.skill-level-row { margin:12px 0; padding:12px; border:1px solid #dbe3ef; border-radius:10px; background:white; }
+.skill-picker .skill-level-row > label { border:0; padding:0; margin:0; }
+.skill-level-row > div { padding:12px 0 0 28px; }
+.skill-picker .skill-level-row > div > label { display:block; border:0; padding:0; margin:0 0 6px; font-size:.85rem; }
+.skill-level-row select { width:100%; max-width:340px; padding:10px; border:1px solid #94a3b8; border-radius:8px; background:white; color:#334155; font:inherit; }
