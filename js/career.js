@@ -55,7 +55,7 @@ $('#upskillJobId').innerHTML='<option value="">เลือกงานที่
       <div><h4>ทักษะที่ยังไม่ได้ระบุ / ควรทบทวน</h4>${list(match.gaps, 'ระบุครบทุกกลุ่มแล้ว ลองเตรียมผลงานเพื่อแสดงทักษะเหล่านี้')}</div></div>`;
   }
   function courseHTML(courses) {
-    return `<ol class="recommended-courses">${courses.map(c => `<li><span class="plan-tier">${esc(c.dimension)}</span><h4>${esc(c.title)}</h4><p>${esc(c.reason)}</p><p class="field-help">${c.hours} ชั่วโมง · ฿${money(c.price)}</p><button type="button" class="course-more" data-course-preview="${c.code}">อ่านรายละเอียดหลักสูตร</button><div id="preview-${c.code}" hidden><p>${esc(c.description)}</p><p><strong>สิ่งที่จะได้รับ:</strong> ${esc(c.outcome)}</p></div></li>`).join('')}</ol>`;
+    return `<ol class="recommended-courses">${courses.map(c => `<li><span class="plan-tier">${esc(c.dimension)}</span><h4>${esc(c.title)}</h4><p>${esc(c.reason)}</p><p class="field-help">${c.hours} ชั่วโมง · ฿${money(c.price)}</p><button type="button" class="course-more" data-course-preview="${c.code}">อ่านรายละเอียดหลักสูตร</button><div id="preview-${c.code}" hidden><p>${esc(c.description)}</p><p><strong>สิ่งที่จะได้รับ:</strong> ${esc(c.outcome)}</p></div><a class="details-link course-catalog-link" href="#course/${c.code}">ดูหลักสูตรนี้ในหน้าอบรม →</a></li>`).join('')}</ol>`;
   }
   function refresh() {
     const job = JOBS.find(j => j.id === $('#upskillJobId').value);
@@ -82,7 +82,7 @@ $('#upskillJobId').innerHTML='<option value="">เลือกงานที่
   });
   $('#upskillTier').addEventListener('change', refresh);
   $('#upskillJobId').addEventListener('change',()=>{selected.clear();refresh();});
-  $('#training').addEventListener('click', event => {
+  $('#upskill').addEventListener('click', event => {
     const button = event.target.closest('[data-course-preview]');
     if (!button) return;
     const panel = button.nextElementSibling;
@@ -135,7 +135,7 @@ $('#upskillJobId').innerHTML='<option value="">เลือกงานที่
 document.addEventListener('click',event=>{
  const button=event.target.closest('[data-upskill]');if(!button)return;
  clear();$('#upskillJobId').value=button.dataset.upskill;$('#upskillTier').value='';refresh();
- location.hash='training';setTimeout(()=>$('#upskillHeading').focus(),0);
+ location.hash='upskill';setTimeout(()=>$('#upskillHeading').focus(),0);
 });
   refresh();
 })();

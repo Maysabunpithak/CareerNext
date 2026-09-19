@@ -40,9 +40,13 @@ function detail(j){
 function route(){
  if($('#applyModal').classList.contains('active'))closeModal();
  const hash=location.hash.slice(1);
+ if(hash.startsWith('course/')){
+  const code=hash.slice(7),course=COURSES.find(c=>c.code===code);
+  if(course){showSection('training');document.title=course.title+' | OpenCareers';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start'});return;}
+ }
  if(hash.startsWith('job/')){const j=JOBS.find(j=>j.id===hash.slice(4));if(j){detail(j);return;}}
- const id=['jobs','training','about'].includes(hash)?hash:'jobs'; showSection(id);
- document.title=id==='training'?'หลักสูตรอบรม | OpenCareers':id==='about'?'เกี่ยวกับเรา | OpenCareers':'หางานเทคโนโลยี | OpenCareers';
+ const id=['jobs','training','upskill','about'].includes(hash)?hash:'jobs'; showSection(id);
+ document.title=id==='upskill'?'วางแผน Upskill | OpenCareers':id==='training'?'หลักสูตรอบรม | OpenCareers':id==='about'?'เกี่ยวกับเรา | OpenCareers':'หางานเทคโนโลยี | OpenCareers';
 }
 $$('.nav-link').forEach(a=>a.href='#'+a.dataset.section);
 window.addEventListener('hashchange',route);
