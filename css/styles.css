@@ -1304,3 +1304,17 @@ body { background:#faf8ff; color:#514c60; }
 #salaryRange::-moz-range-thumb { width:18px; height:18px; border:2px solid #74618c; border-radius:50%; background:#d4f76b; box-shadow:0 2px 5px #30243d18; cursor:grab; }
 #salaryRange:focus { border:0; box-shadow:none; }
 #salaryRange:focus-visible { outline:2px solid #a98cc9; outline-offset:4px; border-radius:8px; }
+/* Light lavender cover with readable dark typography. */
+.hero { background:radial-gradient(ellipse at 15% 10%,#f5efff 0,transparent 55%),#e9def8; border-bottom:1px solid #d9c9ee; }
+.hero .hero-heading { color:#352244; -webkit-text-fill-color:currentColor; }
+.hero .hero-heading-end { color:#684092; }
+.hero .hero-description { color:#625071; }
+.hero .search-box { border-color:#d9cbea; box-shadow:0 12px 32px #51316d0d; }
+.hero-glow-one { background:radial-gradient(ellipse,#b18ad445,transparent 68%); }
+.hero-glow-two { background:radial-gradient(ellipse,#c9a9e845,transparent 68%); }
+.hero-orbit { border-color:#8853b32b; }
+.hero-orbit::before { background:#9670b8; box-shadow:0 0 12px #9670b83d; }
+.hero-orbit-two { border-color:#8853b31f; }
+.hero-orbit-two::before { background:#b090cb; }
+.hero .motion-toggle { background:#f5effc; color:#654978; border-color:#cbb4df; }
+.hero .motion-toggle:hover { background:#fff; color:#432555; border-color:#9670b8; }
