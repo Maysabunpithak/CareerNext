@@ -1109,3 +1109,69 @@ html { scrollbar-gutter:stable; }
 @media print { .modal { display:none; } }
 .logo img { width:36px; height:36px; }
 @media(max-width:640px){ .logo img { width:32px; height:32px; } }
+
+/* Consistent content hierarchy and spacing across the main journeys. */
+body { font-family:'Sarabun','Leelawadee UI','Noto Sans Thai','Segoe UI',sans-serif; line-height:1.75; }
+button,input,select,textarea { font-family:inherit; }
+h1,h2,h3,h4 { line-height:1.45; }
+.job-card { padding:26px; margin-bottom:20px; border-radius:18px; }
+.job-info h3 { font-size:1.25rem; font-weight:700; color:var(--ink); margin-bottom:5px; }
+.job-company { font-size:.9rem; color:#64748b; }
+.job-tags { display:flex; flex-wrap:wrap; gap:7px; margin:16px 0; }
+.tag { font-size:.75rem; padding:5px 10px; border-radius:7px; line-height:1.5; }
+.job-description { font-size:.95rem; line-height:1.85; color:#536078; margin-bottom:20px; }
+.job-footer { border-top:1px solid #eef0f6; padding-top:16px; align-items:center; }
+.job-salary { font-size:1.08rem; font-weight:700; }
+.job-posted { font-size:.78rem; color:#64748b; }
+.job-card > .details-link { display:inline-flex; align-items:center; gap:8px; margin-top:16px; font-size:.9rem; text-decoration:none; }
+.job-card > .details-link:hover { text-decoration:underline; }
+#upskill > .container { max-width:1000px; }
+#upskill .training-title-lg { text-align:center; font-size:clamp(1.8rem,3vw,2.2rem); margin-bottom:28px; color:var(--ink); }
+.upskill-workspace { padding:32px; border-radius:20px; }
+.upskill-steps { list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; padding:0 0 28px; margin:0 0 28px; border-bottom:1px solid var(--border); }
+.upskill-steps li { display:flex; align-items:center; gap:12px; }
+.upskill-steps li > span { display:grid; place-items:center; flex-shrink:0; width:40px; height:40px; border-radius:12px; background:var(--brand-soft); color:var(--brand); font-size:.85rem; font-weight:700; }
+.upskill-steps strong { display:block; color:var(--ink); font-size:.98rem; }
+.upskill-steps small { display:block; color:#64748b; font-size:.78rem; margin-top:2px; }
+#upskillHeading { font-size:1.35rem; margin-bottom:8px; }
+#upskillControls { margin-top:24px; }
+.career-planner { padding:24px; margin:24px 0; }
+.skill-level-row { padding:16px; margin:12px 0; }
+.skill-count { font-size:.92rem; line-height:1.8; }
+.recommended-courses { display:grid; gap:16px; }
+.recommended-courses > li { margin:0; padding:22px; border-radius:12px; }
+.recommended-courses > li:first-child { border:1px solid #c4b5fd; border-left:4px solid var(--brand); background:#faf8ff; box-shadow:0 4px 16px #6d28d908; }
+.recommended-courses h4 { font-size:1.08rem; margin:12px 0; color:var(--ink); }
+.recommended-courses p { line-height:1.8; margin-top:8px; }
+#buildCareerPlan { padding:13px 24px; border-radius:10px; font-size:1rem; }
+.summary-actions { gap:10px; margin-top:24px; }
+.course-banner { min-height:120px; padding:20px 24px; gap:8px; flex-shrink:0; }
+.course-banner strong { font-size:1.6rem; letter-spacing:.025em; }
+.course-banner span { font-size:.75rem; }
+.training-grid { gap:24px; align-items:stretch; }
+.training-content { padding:24px; }
+.training-title { font-size:1.15rem; line-height:1.5; margin:10px 0 14px; }
+.training-description { font-size:.92rem; line-height:1.85; }
+.course-outcome { font-size:.87rem; line-height:1.8; padding:14px; }
+.training-price { align-self:stretch; border-radius:9px; padding:12px 14px; text-align:center; font-size:.95rem; }
+#teamContacts { gap:24px; align-items:stretch; }
+#teamContacts .person-card { display:flex; flex-direction:column; padding:28px; }
+#teamContacts .person-header { text-align:center; margin-bottom:18px; }
+#teamContacts .person-name { font-size:1.1rem; }
+#teamContacts .person-role { font-size:.85rem; margin-top:4px; }
+#teamContacts .person-body { margin-top:auto; padding-top:18px; border-top:1px solid var(--border); text-align:center; font-size:.92rem; }
+#teamContacts .person-body .row { justify-content:center; }
+#teamContacts .team-phone { margin-top:8px; }
+@media(max-width:640px){
+ .job-card,.upskill-workspace { padding:20px; }
+ .job-info h3 { font-size:1.1rem; }
+ .upskill-steps { gap:12px; padding-bottom:20px; margin-bottom:20px; }
+ .upskill-steps li { flex-direction:column; text-align:center; gap:8px; }
+ .upskill-steps small { display:none; }
+ .upskill-steps strong { font-size:.8rem; }
+ .career-planner { padding:16px; }
+ .recommended-courses > li { padding:16px; }
+ #buildCareerPlan { width:100%; }
+ #teamContacts .person-card { padding:24px; }
+}
+@media print { .upskill-steps { display:none; } .recommended-courses > li:first-child { box-shadow:none; } }
