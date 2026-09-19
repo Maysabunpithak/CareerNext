@@ -11,7 +11,7 @@ const assets = [
   'js/career.js',
   'images/opencareers.svg',
   'images/bunpithak.jpg',
-  'images/nichapa.png'
+  'images/nichapa.png','images/career-assistant.png'
 ];
 const output = path.join(__dirname, 'dist', 'static');
 for (const asset of assets) {

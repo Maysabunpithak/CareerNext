@@ -1,5 +1,5 @@
 const fs=require('fs'),path=require('path');const root=__dirname;fs.mkdirSync(path.join(root,'dist/server'),{recursive:true});
-const names=['index.html','css/styles.css','js/app.js','js/jobs.js','js/courses.js','js/career.js','images/opencareers.svg','images/bunpithak.jpg','images/nichapa.png'];
+const names=['index.html','css/styles.css','js/app.js','js/jobs.js','js/courses.js','js/career.js','images/opencareers.svg','images/bunpithak.jpg','images/nichapa.png','images/career-assistant.png'];
 const files={};
 for(const n of names){
  if(!fs.existsSync(path.join(root,n)))throw Error('Missing '+n);
