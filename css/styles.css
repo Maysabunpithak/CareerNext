@@ -1046,6 +1046,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 /* Balanced Thai hero typography. */
 .hero .hero-heading { font-size:clamp(2rem,3.7vw,3rem); line-height:1.4; font-weight:800; margin:0 auto 20px; text-wrap:balance; }
 .hero-heading-end { display:inline-block; margin-left:.2em; }
-.hero .hero-description { max-width:680px; margin:0 auto 30px; font-size:clamp(1rem,1.5vw,1.15rem); line-height:1.85; font-weight:400; text-wrap:balance; }
+.hero .hero-description { max-width:800px; margin:0 auto 30px; font-size:clamp(1rem,1.35vw,1.1rem); line-height:1.85; font-weight:400; text-wrap:balance; }
 .hero-description > span { display:block; }
 @media(max-width:640px){ .hero .hero-heading { margin-bottom:16px; } .hero .hero-description { margin-bottom:24px; line-height:1.8; } }
