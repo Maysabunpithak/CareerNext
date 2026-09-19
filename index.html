@@ -31,8 +31,11 @@
           <p>ค้นหางาน AI และดิจิทัล พร้อม Upskill / Reskill เพื่อโอกาสใหม่ของคุณ</p>
           <form class="search-box" id="searchForm" role="search">
             <input type="text" class="search-input" aria-label="ตำแหน่งงานหรือคำค้น" placeholder="ตำแหน่งงานหรือคำค้น" id="searchInput" />
-            <input type="text" class="search-input" aria-label="จังหวัดหรือเมือง" placeholder="พิมพ์หรือเลือกจังหวัด / เมือง" id="locationInput" list="locationOptions" autocomplete="off" />
-              <datalist id="locationOptions"></datalist>
+            <div class="location-combobox">
+              <input type="text" class="search-input" aria-label="จังหวัดหรือเมือง" placeholder="พิมพ์หรือเลือกจังหวัด / เมือง" id="locationInput" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="locationOptions" autocomplete="off" />
+              <button type="button" class="location-toggle" aria-label="แสดงรายการสถานที่" aria-controls="locationOptions" aria-expanded="false">▾</button>
+              <ul id="locationOptions" class="location-options" role="listbox" aria-label="สถานที่ทำงาน" hidden></ul>
+            </div>
             <button class="search-btn" id="searchBtn" type="submit">ค้นหางาน</button>
           </form>
           <button class="hero-register" id="registerTalent">วางแผนสมัครงานและพัฒนาทักษะ AI →</button>

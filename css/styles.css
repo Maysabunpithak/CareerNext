@@ -993,3 +993,15 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
  body.printing-career .recommended-courses > li, body.printing-career .skill-comparison { break-inside: avoid; }
  body.printing-career .success-message { color: #111; text-align: left; }
 }
+
+/* Keep location suggestions directly below the field, including on mobile. */
+.hero { overflow: visible; z-index: 3; }
+.hero::after { pointer-events: none; max-width: 100%; max-height: 100%; }
+.location-combobox { position: relative; flex: 1; min-width: 0; text-align: left; }
+.location-combobox .search-input { display: block; width: 100%; box-sizing: border-box; padding-right: 36px; border-radius: 10px; }
+.location-toggle { position: absolute; right: 4px; top: 0; bottom: 0; width: 32px; border: 0; background: transparent; color: #334155; cursor: pointer; font-size: 18px; }
+.location-options { position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 30; margin: 0; padding: 6px; list-style: none; background: #fff; color: #334155; border: 1px solid #dbe3ef; border-radius: 12px; box-shadow: 0 12px 28px #0f172a26; max-height: 240px; overflow-y: auto; }
+.location-options[hidden] { display: none; }
+.location-options [role="option"] { padding: 10px 12px; border-radius: 7px; font-size: .9rem; line-height: 1.5; overflow-wrap: anywhere; cursor: pointer; }
+.location-options [role="option"]:hover, .location-options [aria-selected="true"] { background: #eff6ff; color: #1d4ed8; }
+.location-empty { padding: 12px; font-size: .85rem; color: #64748b; }

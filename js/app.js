@@ -11,7 +11,6 @@ let saved=new Set();
 try { const ids=JSON.parse(localStorage.getItem('opencareers.saved')||'[]'); if(Array.isArray(ids)) saved=new Set(ids.filter(id=>JOBS.some(j=>j.id===id))); } catch {}
 let currentJob=null, returnFocus=null;
 const state={keyword:'',location:''};
-$('#locationOptions').innerHTML=[...new Set(JOBS.map(j=>j.location))].map(location=>`<option value="${esc(location)}"></option>`).join('');
 function saveJobs(){try{localStorage.setItem('opencareers.saved',JSON.stringify([...saved]));}catch{}}
 function likeButton(j){return `<button class="heart-btn ${saved.has(j.id)?'liked':''}" data-like="${j.id}" aria-label="บันทึกงาน ${esc(j.title)}" aria-pressed="${saved.has(j.id)}">${saved.has(j.id)?'♥':'♡'}</button>`;}
 function tags(j){return `<div class="job-tags"><span class="tag level">${levelNames[j.level]}</span><span class="tag type">${typeNames[j.type]}</span><span class="tag remote">${esc(j.location)}</span></div>`;}
@@ -103,3 +102,35 @@ form.addEventListener('submit',e=>{
 });
 $$('.training-card').forEach(el=>el.classList.add('show'));
 renderJobs();route();
+
+/* Editable location combobox anchored below its input. */
+(()=>{
+ const input=$('#locationInput'), list=$('#locationOptions'), box=input.closest('.location-combobox'), toggle=$('.location-toggle',box);
+ const places=[...new Set(JOBS.map(j=>j.location))];
+ let active=-1, visible=[];
+ function close(){list.hidden=true;input.setAttribute('aria-expanded','false');toggle.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');active=-1;}
+ function open(all=false){
+  visible=places.filter(p=>all||p.toLowerCase().includes(input.value.trim().toLowerCase()));
+  active=-1;input.removeAttribute('aria-activedescendant');
+  list.innerHTML=visible.length?visible.map((p,i)=>`<li role="option" id="location-option-${i}" data-location-index="${i}" aria-selected="false">${esc(p)}</li>`).join(''):'<li class="location-empty" role="presentation">ไม่พบในรายการ — พิมพ์สถานที่แล้วกดค้นหางานได้</li>';
+  list.hidden=false;input.setAttribute('aria-expanded','true');toggle.setAttribute('aria-expanded','true');
+ }
+ function choose(i){if(!visible[i])return;input.value=visible[i];close();input.focus();}
+ function highlight(){Array.from(list.querySelectorAll('[role="option"]')).forEach((el,i)=>{el.setAttribute('aria-selected',String(i===active));if(i===active){input.setAttribute('aria-activedescendant',el.id);el.scrollIntoView({block:'nearest'});}});}
+ input.addEventListener('focus',()=>open(true));
+ input.addEventListener('click',()=>{if(list.hidden)open(true);});
+ input.addEventListener('input',()=>open());
+ toggle.addEventListener('click',()=>{const wasOpen=!list.hidden;input.focus();if(wasOpen)close();else open(true);});
+ list.addEventListener('pointerdown',e=>e.preventDefault());
+ list.addEventListener('click',e=>{const option=e.target.closest('[data-location-index]');if(option)choose(Number(option.dataset.locationIndex));});
+ input.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if(list.hidden)open(true);if(visible.length){active=(active+(e.key==='ArrowDown'?1:-1)+visible.length)%visible.length;highlight();}}
+  else if(e.key==='Enter'&&!list.hidden&&active>=0){e.preventDefault();choose(active);}
+  else if(e.key==='Escape'){e.preventDefault();close();}
+  else if(e.key==='Tab')close();
+ });
+ box.addEventListener('focusout',e=>{if(!box.contains(e.relatedTarget))close();});
+ document.addEventListener('pointerdown',e=>{if(!box.contains(e.target))close();});
+ $('#searchForm').addEventListener('submit',close);
+ $('#searchForm').addEventListener('reset',close);
+})();
