@@ -35,18 +35,18 @@ function showSection(id){
 function detail(j){
  const list=items=>'<ul>'+items.map(s=>`<li>${esc(s)}</li>`).join('')+'</ul>';
  $('#jobDetails').innerHTML=`<article class="detail-card"><div class="job-header"><div class="job-company-info"><div class="company-logo ${j.color}">${j.logo}</div><div><h1 tabindex="-1" id="detailHeading">${esc(j.title)}</h1><p class="job-company">${esc(j.company)}</p></div></div>${likeButton(j)}</div>${tags(j)}<p class="detail-summary">${esc(j.summary)}</p><div class="job-footer"><strong class="job-salary">${salary(j)}</strong><time datetime="${j.date}">ประกาศ ${dateLabel(j.date)}</time></div><div class="detail-grid"><section><h2>หน้าที่และความรับผิดชอบ</h2>${list(j.duties)}</section><section><h2>คุณสมบัติผู้สมัคร</h2>${list(j.qualifications)}</section><section><h2>ทักษะที่ต้องการ</h2>${list(j.skills)}</section><section><h2>สวัสดิการและสิ่งที่จะได้รับ</h2>${list(j.benefits)}</section></div><div class="detail-contact"><h2>ช่องทางติดต่อ</h2><p>ฝ่ายบุคคล — ${esc(j.company)}</p><p>${esc(j.contact)} <span class="sample-label">(อีเมลตัวอย่าง)</span></p></div><button class="submit-btn" data-apply="${j.id}">สมัครตำแหน่ง ${esc(j.title)}</button><button type="button" class="upskill-link" data-upskill="${j.id}">พัฒนาทักษะสำหรับงานนี้ →</button></article>`;
- showSection('details'); document.title=j.title+' | OpenCareers'; $('#detailHeading').focus();
+ showSection('details'); document.title=j.title+' | CareerNext'; $('#detailHeading').focus();
 }
 function route(){
  if($('#applyModal').classList.contains('active'))closeModal();
  const hash=location.hash.slice(1);
  if(hash.startsWith('course/')){
   const code=hash.slice(7),course=COURSES.find(c=>c.code===code);
-  if(course){showSection('training');document.title=course.title+' | OpenCareers';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start'});return;}
+  if(course){showSection('training');document.title=course.title+' | CareerNext';const target=$('#course-'+code);target.focus({preventScroll:true});target.scrollIntoView({block:'start'});return;}
  }
  if(hash.startsWith('job/')){const j=JOBS.find(j=>j.id===hash.slice(4));if(j){detail(j);return;}}
  const id=['jobs','training','upskill','about'].includes(hash)?hash:'jobs'; showSection(id);
- document.title=id==='upskill'?'วางแผน Upskill | OpenCareers':id==='training'?'หลักสูตรอบรม | OpenCareers':id==='about'?'เกี่ยวกับเรา | OpenCareers':'หางานเทคโนโลยี | OpenCareers';
+ document.title=id==='upskill'?'วางแผน Upskill | CareerNext':id==='training'?'หลักสูตรอบรม | CareerNext':id==='about'?'เกี่ยวกับเรา | CareerNext':'หางานเทคโนโลยี | CareerNext';
 }
 $$('.nav-link').forEach(a=>a.href='#'+a.dataset.section);
 window.addEventListener('hashchange',route);

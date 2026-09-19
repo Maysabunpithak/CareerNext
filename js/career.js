@@ -104,7 +104,7 @@ const LearningPlan = (() => {
 
  $('#upskillJobId').addEventListener('change',()=>{Object.keys(levels).forEach(k=>delete levels[k]);refresh();});
  function plainText(data){
-  return ['OpenCareers — แผนพัฒนาทักษะ',data.job.title,
+  return ['CareerNext — แผนพัฒนาทักษะ',data.job.title,
    'ความรู้ที่ระบุ:',...data.job.skills.map(s=>s+': '+LearningPlan.labels[data.levels[s]||0]),
    'ลำดับการเรียน:',...data.steps.map((s,i)=>`${i+1}. ${s.title}\nพัฒนาด้าน: ${s.skills.join(', ')}\n${s.reason}\n${s.practice}\n${s.note}${s.optional?' (ทางเลือกเพิ่มเติม)':''}`),
    data.steps.length?'':'เชี่ยวชาญครบทุกด้านตามที่ระบุ: เตรียม Portfolio และขอข้อเสนอแนะ',
@@ -127,7 +127,7 @@ const LearningPlan = (() => {
   $('#printCareerSummary').addEventListener('click',()=>{document.body.classList.add('printing-career');try{window.print();}finally{document.body.classList.remove('printing-career');}});
   $('#downloadCareerSummary').addEventListener('click',()=>{
    const url=URL.createObjectURL(new Blob(['\uFEFF'+plainText(report)],{type:'text/plain;charset=utf-8'}));
-   const a=document.createElement('a');a.href=url;a.download='OpenCareers-plan-'+j.id+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+   const a=document.createElement('a');a.href=url;a.download='CareerNext-plan-'+j.id+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
   $('#editCareerPlan').addEventListener('click',()=>{results.hidden=true;results.innerHTML='';report=null;$('#upskillControls').hidden=false;$('#buildCareerPlan').hidden=false;refresh();$('#upskillJobId').focus();});
   $('#newCareerPlan').addEventListener('click',reset);
